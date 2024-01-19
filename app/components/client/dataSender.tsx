@@ -1,4 +1,5 @@
 'use client';
+// This component is create a new user for the app
 import React from 'react'
 
 type UserData = {
