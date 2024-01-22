@@ -1,3 +1,4 @@
+import { SessionProvider } from "next-auth/react";
 import CheckingGroups from "./components/client/checkingGroups";
 import CheckingMembers from "./components/client/checkingMembers";
 import DataSender from "./components/client/dataSender";
@@ -11,7 +12,7 @@ export default function Home() {
       <CheckingMembers />
       {/* <GetTeamData /> */}
       {/* <GetData /> */}
-      {/* <DataSender />   */}
+      <DataSender />  
     </>
   )
 }
