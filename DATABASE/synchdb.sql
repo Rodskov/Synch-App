@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2024 at 08:32 AM
+-- Generation Time: Jan 24, 2024 at 04:26 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,7 +40,28 @@ CREATE TABLE `clients_users` (
 
 INSERT INTO `clients_users` (`name`, `username`, `id`, `organization`) VALUES
 ('Another', 'AnotherUser', '4321', 'PUP'),
-('William James', 'Simonde44', 'Sim44', 'PUP');
+('William James', 'Simonde44', 'Sim44', 'PUP'),
+('Monique', 'Polariaris', 'elle', 'OLFU'),
+('Luffy D. Monkey', 'LDM', '0505', 'Straw Hats Pirate');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `secret_creds`
+--
+
+CREATE TABLE `secret_creds` (
+  `user_id` varchar(255) NOT NULL,
+  `pass` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `secret_creds`
+--
+
+INSERT INTO `secret_creds` (`user_id`, `pass`) VALUES
+('Sim44', '1234'),
+('elle', '1234');
 
 -- --------------------------------------------------------
 
@@ -84,7 +105,11 @@ INSERT INTO `team_members_list` (`user_id`, `team_id`) VALUES
 ('Sim44', 'WD_2024'),
 ('4321', 'FCS_2024'),
 ('Sim44', 'FCS_2024'),
-('Sim44', 'DDC_2024');
+('Sim44', 'DDC_2024'),
+('elle', 'FCS_2024'),
+('elle', 'WD_2024'),
+('LDM', 'OS_2024'),
+('0505', 'OS_2024');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
