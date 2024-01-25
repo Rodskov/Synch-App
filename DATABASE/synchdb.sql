@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2024 at 04:26 PM
+-- Generation Time: Jan 25, 2024 at 05:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,9 +40,10 @@ CREATE TABLE `clients_users` (
 
 INSERT INTO `clients_users` (`name`, `username`, `id`, `organization`) VALUES
 ('Another', 'AnotherUser', '4321', 'PUP'),
-('William James', 'Simonde44', 'Sim44', 'PUP'),
+('William James Elumba', 'Simonde44', 'josellemoniqueencisobf4life', 'PUP'),
 ('Monique', 'Polariaris', 'elle', 'OLFU'),
-('Luffy D. Monkey', 'LDM', '0505', 'Straw Hats Pirate');
+('Luffy D. Monkey', 'LDM', '0505', 'Straw Hats Pirate'),
+('Real User', 'User_Real_99', 'mp3PPZr+RoiEtpGgUpJ5', 'OrgLang');
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,10 @@ CREATE TABLE `secret_creds` (
 
 INSERT INTO `secret_creds` (`user_id`, `pass`) VALUES
 ('Sim44', '1234'),
-('elle', '1234');
+('elle', '1234'),
+('Simonde44', '1234'),
+('User_Real_99', 'asdf'),
+('Polariaris', 'asdf1234');
 
 -- --------------------------------------------------------
 
@@ -109,7 +113,11 @@ INSERT INTO `team_members_list` (`user_id`, `team_id`) VALUES
 ('elle', 'FCS_2024'),
 ('elle', 'WD_2024'),
 ('LDM', 'OS_2024'),
-('0505', 'OS_2024');
+('0505', 'OS_2024'),
+('Simonde44', 'OS_2024'),
+('Simonde44', 'WD_2024'),
+('User_Real_99', 'WD_2024'),
+('Polariaris', 'OS_2024');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

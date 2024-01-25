@@ -10,7 +10,7 @@ export async function POST(req: NextRequest){
             const query = `SELECT c.name, tg.team_name, tg.team_id
             FROM team_groups_name as tg
             JOIN team_members_list as tm ON tm.team_id = tg.team_id
-            JOIN clients_users as c ON tm.user_id = c.id
+            JOIN clients_users as c ON tm.user_id = c.username
             WHERE c.id = '${dataReceived.username}'`;
 
             const conn = mysql2.createConnection(DBConnect())
