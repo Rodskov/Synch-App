@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2024 at 05:43 PM
+-- Generation Time: Jan 25, 2024 at 08:12 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,10 +40,15 @@ CREATE TABLE `clients_users` (
 
 INSERT INTO `clients_users` (`name`, `username`, `id`, `organization`) VALUES
 ('Another', 'AnotherUser', '4321', 'PUP'),
-('William James Elumba', 'Simonde44', 'josellemoniqueencisobf4life', 'PUP'),
-('Monique', 'Polariaris', 'elle', 'OLFU'),
+('William', 'Simonde44', 'josellemonique4life', 'PUP'),
+('Monique', 'Polariaris', 'williamjames4life', 'OLFU'),
 ('Luffy D. Monkey', 'LDM', '0505', 'Straw Hats Pirate'),
-('Real User', 'User_Real_99', 'mp3PPZr+RoiEtpGgUpJ5', 'OrgLang');
+('Real User', 'User_Real_99', 'mp3PPZr+RoiEtpGgUpJ5', 'OrgLang'),
+('Justin', 'Rodskov', 'H/kUuwrmVLsYrK3ee159', 'PUP'),
+('Human', 'UserHuman', '9b+4X8mP5zEb4T6+zPvX', 'Humanity'),
+('Alien', 'UserAlien', '8mQViARzbqy5odiSLskq', 'OuterSpace'),
+('Humalien', 'Alien_Human', 'amwps2lOeR+0PkqnIFiY', 'EarthAndSpace'),
+('Sample', 'UsernameSample', 'gGX3KF8aEpRY2ihRP2W0', 'SampleOrg');
 
 -- --------------------------------------------------------
 
@@ -61,11 +66,15 @@ CREATE TABLE `secret_creds` (
 --
 
 INSERT INTO `secret_creds` (`user_id`, `pass`) VALUES
-('Sim44', '1234'),
-('elle', '1234'),
 ('Simonde44', '1234'),
+('Polariaris', '1234'),
+('Rodskov', 'qwer'),
+('UserHuman', 'zxcv'),
+('UserAlien', 'tyui'),
+('Alien_Human', 'fdsa'),
+('UsernameSample', 'zxcv'),
 ('User_Real_99', 'asdf'),
-('Polariaris', 'asdf1234');
+('LDM', 'asdf');
 
 -- --------------------------------------------------------
 
