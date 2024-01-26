@@ -11,7 +11,7 @@ export async function POST(req: NextRequest){
           }
           
           // Example: Generate a random Base64 string with a length of 10
-          const randomBase64Value = generateRandomBase64(20);
+          const randomBase64Value = generateRandomBase64(50);
           console.log(randomBase64Value)
           const conn = mysql2.createConnection(DBConnect())
         try {

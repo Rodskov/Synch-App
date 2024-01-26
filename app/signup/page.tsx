@@ -62,7 +62,7 @@ const SignUp = () => {
                     },
                     body: JSON.stringify(dataToSend)
                 })
-                setTimeout(() => { window.location.href = "/" }, 2000)
+                setTimeout(() => { window.location.href = "/" }, 1000)
             } else if(passValue != passVerifyValue){
                 toast.error('Passwords do not match.')
             }

@@ -6,6 +6,7 @@ import LogIn from "./components/client/logIn";
 import { cookies } from "next/headers";
 import { ToastContainer } from "react-toastify";
 import ToastLayout from "./components/essentials/toastlayout";
+import NewTeamMember from "./components/client/newTeamMember";
 
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <>
           <ToastLayout>
             <CheckingGroups />
+            <Link href={"/addNewMember"}>Add a new member</Link> <br />
             <LogoutBtn />
           </ToastLayout>
         </>

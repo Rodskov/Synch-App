@@ -52,7 +52,7 @@ export default function CheckingGroups() {
       {loading && <p>Loading...</p>}
       {!loading && (!groupsData || groupsData.length === 0) && (
         <p>
-          <h1>Name: {userData[0].name}</h1>
+          <h1>Name: {userData[0]?.name}</h1>
           No teams joined
         </p>
       )}

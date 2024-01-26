@@ -44,7 +44,7 @@ const LogIn = () => {
         <label htmlFor="username">Username: </label>
         <input type="text" name="username" id="username" onChange={unameHandler} className='text-black'/> <br />
         <label htmlFor="password">Password: </label>
-        <input type="text" name="password" id="password" onChange={passHandler} className='text-black'/> <br />
+        <input type="password" name="password" id="password" onChange={passHandler} className='text-black'/> <br />
         <button onClick={btnFunction}>Log in</button> <br />
     </>
   )
