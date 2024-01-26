@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2024 at 08:12 PM
+-- Generation Time: Jan 26, 2024 at 09:33 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,7 +48,49 @@ INSERT INTO `clients_users` (`name`, `username`, `id`, `organization`) VALUES
 ('Human', 'UserHuman', '9b+4X8mP5zEb4T6+zPvX', 'Humanity'),
 ('Alien', 'UserAlien', '8mQViARzbqy5odiSLskq', 'OuterSpace'),
 ('Humalien', 'Alien_Human', 'amwps2lOeR+0PkqnIFiY', 'EarthAndSpace'),
-('Sample', 'UsernameSample', 'gGX3KF8aEpRY2ihRP2W0', 'SampleOrg');
+('Sample', 'UsernameSample', 'gGX3KF8aEpRY2ihRP2W0', 'SampleOrg'),
+('John Smith', 'JS', 'sTO+uy/LGezTfPRc8w4D', 'MI6'),
+('Johnny C. Isla', 'JCI', '8nc8Y+0mMsTwUktFA8hn', 'Wattpad'),
+('Bigmom Kaido', 'onigashima', 'tFJutWcLzYrlo3LdoL6KU62mqwHYVkK1crFqKWvhzKV+D/De5J', 'one piece');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requests`
+--
+
+CREATE TABLE `requests` (
+  `send_to` varchar(255) NOT NULL,
+  `sent_from` varchar(255) NOT NULL,
+  `request_type` int(1) NOT NULL,
+  `status` int(1) NOT NULL,
+  `owner` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `requests`
+--
+
+INSERT INTO `requests` (`send_to`, `sent_from`, `request_type`, `status`, `owner`) VALUES
+('Polariaris', 'Simonde44', 1, 0, 'Polariaris');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `req_types`
+--
+
+CREATE TABLE `req_types` (
+  `request_type` int(255) NOT NULL,
+  `detail` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `req_types`
+--
+
+INSERT INTO `req_types` (`request_type`, `detail`) VALUES
+(1, 'team_invite');
 
 -- --------------------------------------------------------
 
@@ -74,7 +116,10 @@ INSERT INTO `secret_creds` (`user_id`, `pass`) VALUES
 ('Alien_Human', 'fdsa'),
 ('UsernameSample', 'zxcv'),
 ('User_Real_99', 'asdf'),
-('LDM', 'asdf');
+('LDM', 'asdf'),
+('JS', 'qwer'),
+('JCI', 'zxcv'),
+('onigashima', 'cherry');
 
 -- --------------------------------------------------------
 
@@ -126,7 +171,8 @@ INSERT INTO `team_members_list` (`user_id`, `team_id`) VALUES
 ('Simonde44', 'OS_2024'),
 ('Simonde44', 'WD_2024'),
 ('User_Real_99', 'WD_2024'),
-('Polariaris', 'OS_2024');
+('Polariaris', 'OS_2024'),
+('Rodskov', 'WD_2024');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
