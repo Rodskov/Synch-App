@@ -1,6 +1,7 @@
 'use client';
 import React from 'react'
 import ToastLayout from '../components/essentials/toastlayout';
+import { toast } from 'react-toastify';
 
 type SendData = {
   username: string,
@@ -29,7 +30,13 @@ export default function Page() {
       body: JSON.stringify(dataToSend)
     })
     const result = await response.json()
-    console.log(result)
+    if(result.receiver !== undefined){
+      console.log(result.receiver)
+      toast.success("Invitation is sent to " + result.receiver)
+    } else if(result.message !== undefined){
+      console.log(result.message)
+      toast.error(result.message)
+    }
   }
   return (
     <>

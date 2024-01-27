@@ -9,18 +9,29 @@ export async function POST(req: NextRequest){
         const dataReceived = await req.json()
 
         const conn = mysql2.createConnection(DBConnect())
-        const checkUserQuery = `SELECT c.username FROM clients_users as c WHERE c.username = ${dataReceived.username}`
+        const checkUserQuery = `SELECT c.username FROM clients_users as c WHERE c.username = '${dataReceived.username}'`
+
+        const [checkUserResult] = await (await conn).query(checkUserQuery);
+        console.log(checkUserResult.length)
 
         const cookieQuery = `SELECT c.username FROM clients_users as c WHERE c.id = '${cookieValue.value}'`
-
         const [cookieResult] = await (await conn).query(cookieQuery)
 
-        const requestQuery = `INSERT INTO requests (send_to, sent_from, request_type, status, owner) VALUES ('${dataReceived.username}', '${cookieResult[0].username}', 1, ${dataReceived.status}, '${dataReceived.username}')`
-
-        const [requestVar] = await (await conn).query(requestQuery)
-        console.log(requestVar)
-        console.log("Method is correct")
-        return NextResponse.json({receiver: dataReceived.username,
-                                    sender: cookieResult[0].username})
+        if(checkUserResult.length > 0){
+            console.log("There is data")
+            if(dataReceived.username == cookieResult[0].username){
+                return NextResponse.json({message: "That is your username."})
+            } else {
+                const requestQuery = `INSERT INTO requests (send_to, sent_from, request_type, status, owner) VALUES ('${dataReceived.username}', '${cookieResult[0].username}', 1, ${dataReceived.status}, '${dataReceived.username}')`
+                //const [requestVar] = await (await conn).query(requestQuery)
+                //console.log(requestVar)
+                console.log("Method is correct")
+                return NextResponse.json({receiver: dataReceived.username,
+                                            sender: cookieResult[0].username})
+            }            
+        }else if(checkUserResult.length == 0){
+            console.log("There is no user")
+            return NextResponse.json({message: "User does not exist."})
+        }
     }
 }
