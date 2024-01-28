@@ -5,33 +5,96 @@ import DBConnect from "../dbConnect/dbConnect";
 
 export async function POST(req: NextRequest){
     if(req.method === 'POST'){
-        const cookieValue:any = cookies().get('userloggedin')
-        const dataReceived = await req.json()
-
         const conn = mysql2.createConnection(DBConnect())
-        const checkUserQuery = `SELECT c.username FROM clients_users as c WHERE c.username = '${dataReceived.username}'`
+        try {
+            const cookieValue:any = cookies().get('userloggedin')
+            const dataReceived = await req.json()
 
-        const [checkUserResult] = await (await conn).query(checkUserQuery);
-        console.log(checkUserResult.length)
+            const checkUserQuery = `SELECT c.username FROM clients_users as c WHERE c.username = '${dataReceived.username}'`
 
-        const cookieQuery = `SELECT c.username FROM clients_users as c WHERE c.id = '${cookieValue.value}'`
-        const [cookieResult] = await (await conn).query(cookieQuery)
+            const teamMemberQuery = `SELECT tm.user_id, tm.team_id FROM team_members_list as tm WHERE tm.user_id = '${dataReceived.username}'`
+            const [teamMemberResult] = <any> await (await conn).query(teamMemberQuery)
+            console.log(teamMemberResult.length)
 
-        if(checkUserResult.length > 0){
-            console.log("There is data")
-            if(dataReceived.username == cookieResult[0].username){
-                return NextResponse.json({message: "That is your username."})
+            const [checkUserResult] = <any> await (await conn).query(checkUserQuery);
+            console.log(checkUserResult.length)
+
+            const cookieQuery = `SELECT c.username FROM clients_users as c WHERE c.id = '${cookieValue.value}'`
+            const [cookieResult] = <any> await (await conn).query(cookieQuery)
+
+            const invitationExistQuery = `SELECT r.team_id, r.owner, r.status, r.sent_from FROM requests as r WHERE r.owner = '${dataReceived.username}'`
+            const [invitationExistResult] = <any> await (await conn).query(invitationExistQuery);
+            console.log(invitationExistResult)
+
+            if(teamMemberResult.length > 0) {
+                if(dataReceived.username == cookieResult[0].username){
+                    return NextResponse.json({message: "That is your username."})
+                } else if(teamMemberResult[0].user_id == dataReceived.username && teamMemberResult[0].team_id == dataReceived.team_id){
+                    return NextResponse.json({message: "You are inviting a user that is already part of the team."})
+                } else {
+                    if(checkUserResult.length > 0){
+                        console.log("There is data")
+                        if(dataReceived.username == cookieResult[0].username){
+                            return NextResponse.json({message: "That is your username."})
+                        } else {
+                            if(invitationExistResult.length !== 0){
+                                for(var i=0; i < invitationExistResult.length; i++){
+                                    console.log("This is the one that ran")
+                                    if(invitationExistResult[i].owner == dataReceived.username){
+                                        if(invitationExistResult[i].team_id == dataReceived.team_id){
+                                            if(invitationExistResult[i].sent_from == cookieResult[0].username){
+                                                return NextResponse.json({message: `An invitation to ${dataReceived.username} already exists`})
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            const requestQuery = `INSERT INTO requests (send_to, sent_from, request_type, status, owner, team_id) VALUES ('${dataReceived.username}', '${cookieResult[0].username}', 1, ${dataReceived.status}, '${dataReceived.username}', '${dataReceived.team_id}')`
+                            const [requestVar] = await (await conn).query(requestQuery)
+                            console.log(requestVar)
+                            console.log("Method is correct")
+                            return NextResponse.json({receiver: dataReceived.username,
+                                                        sender: cookieResult[0].username})
+                        }            
+                    } else if (checkUserResult.length == 0){
+                        console.log("There is no user")
+                        return NextResponse.json({message: "User does not exist."})
+                    }
+                }
             } else {
-                const requestQuery = `INSERT INTO requests (send_to, sent_from, request_type, status, owner) VALUES ('${dataReceived.username}', '${cookieResult[0].username}', 1, ${dataReceived.status}, '${dataReceived.username}')`
-                //const [requestVar] = await (await conn).query(requestQuery)
-                //console.log(requestVar)
-                console.log("Method is correct")
-                return NextResponse.json({receiver: dataReceived.username,
-                                            sender: cookieResult[0].username})
-            }            
-        }else if(checkUserResult.length == 0){
-            console.log("There is no user")
-            return NextResponse.json({message: "User does not exist."})
+                if(checkUserResult.length > 0){
+                    console.log("There is data")
+                    if(dataReceived.username == cookieResult[0].username){
+                        return NextResponse.json({message: "That is your username."})
+                    } else {
+                        if(invitationExistResult.length !== 0){
+                            for(var i=0; i < invitationExistResult.length; i++){
+                                console.log("This is the one that ran")
+                                if(invitationExistResult[i].owner == dataReceived.username){
+                                    if(invitationExistResult[i].team_id == dataReceived.team_id){
+                                        if(invitationExistResult[i].sent_from == cookieResult[0].username){
+                                            return NextResponse.json({message: `An invitation to ${dataReceived.username} already exists`})
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        const requestQuery = `INSERT INTO requests (send_to, sent_from, request_type, status, owner, team_id) VALUES ('${dataReceived.username}', '${cookieResult[0].username}', 1, ${dataReceived.status}, '${dataReceived.username}', '${dataReceived.team_id}')`
+                        const [requestVar] = await (await conn).query(requestQuery)
+                        console.log(requestVar)
+                        console.log("Method is correct")
+                        return NextResponse.json({receiver: dataReceived.username,
+                                                    sender: cookieResult[0].username})
+                    }            
+                } else if (checkUserResult.length == 0){
+                    console.log("There is no user")
+                    return NextResponse.json({message: "User does not exist."})
+                }
+            }
+        } catch (error) {
+            console.log(error)
+        } finally {
+            (await conn).end()
         }
     }
 }

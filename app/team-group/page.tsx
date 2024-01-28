@@ -8,6 +8,7 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
 
     useEffect(() => {
         const getTeamData = async () => {
+            var result: any = "";
             try {
                 const dataToSend = {
                     team_id: searchParams.data,
@@ -20,7 +21,7 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                     body: JSON.stringify(dataToSend),
                 });
                 if (response.ok) {
-                    const result = await response.json();
+                    result = await response.json();
                     setMembersData(result);
                     console.log(result);
                 } else {
@@ -50,6 +51,7 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                             <li key={member.id}>{member.name}</li>
                         ))}
                     </ul>
+                    <Link href={`/addNewMember?team_id=${encodeURIComponent(membersData[0].team_id)}`}>Add a new member</Link> <br />
                     <Link href={'/'}>Go back</Link>
                 </>
             )}

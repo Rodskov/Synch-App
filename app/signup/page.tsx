@@ -2,7 +2,7 @@
 import Link from 'next/link';
 // This component is create a new user for the app
 import React from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ToastLayout from '../components/essentials/toastlayout';
 
@@ -25,8 +25,27 @@ const SignUp = () => {
         console.log(event.target.value)
     }
 
-    const unameHandler = (event: any) => {
+    const unameHandler = async (event: any) => {
         unameValue = event.target.value
+        const dataToSend = {
+            unameVerify: unameValue
+        }
+        const response = await fetch('api/userNameVerify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataToSend)
+        })
+        const result = await response.json()
+        if(result.message != undefined){
+            toast.success(result.message)
+        } else if(result.error != undefined){
+            toast.error(result.error)
+            unameValue = ""
+            event.target.value = ""
+        }
+        console.log(result)
         console.log(event.target.value)
     }
     
@@ -44,7 +63,7 @@ const SignUp = () => {
         passVerifyValue = event.target.value
         console.log(passVerifyValue)
     }
-    
+
     const submit = async () => {
         const dataToSend: UserData = {
             name: nameValue,
@@ -75,15 +94,15 @@ const SignUp = () => {
         <ToastLayout>
             <h1>Create an account to start using Synch App</h1>
             <label htmlFor="name">Name: </label>
-            <input type="text" onChange={nameHandler} className="text-black" required/> <br />
+            <input type="text" onBlur={nameHandler} className="text-black" required/> <br />
             <label htmlFor="uname">Username: </label>
-            <input type="text" onChange={unameHandler} className="text-black" required/> <br />
+            <input type="text" onBlur={unameHandler} className="text-black" required/> <br />
             <label htmlFor="org">Organization: </label>
-            <input type="text" onChange={orgHandler} className="text-black" required/> <br />
+            <input type="text" onBlur={orgHandler} className="text-black" required/> <br />
             <label htmlFor="pass">Password: </label>
-            <input type="password" onChange={passHandler} className="text-black" required/> <br />
+            <input type="password" onBlur={passHandler} className="text-black" required/> <br />
             <label htmlFor="verify-pass">Verify Password: </label>
-            <input type="password" onChange={passVerifyHandler} className="text-black" required/> <br />
+            <input type="password" onBlur={passVerifyHandler} className="text-black" required/> <br />
             <button onClick={submit}>Create Account</button> <br />
             <Link href={'/'}>Go back to Home Page</Link>
         </ToastLayout>

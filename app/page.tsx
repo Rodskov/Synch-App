@@ -19,7 +19,6 @@ export default function Home() {
         <>
           <ToastLayout>
             <CheckingGroups />
-            <Link href={"/addNewMember"}>Add a new member</Link> <br />
             <LogoutBtn />
           </ToastLayout>
         </>

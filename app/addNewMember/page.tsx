@@ -2,13 +2,15 @@
 import React from 'react'
 import ToastLayout from '../components/essentials/toastlayout';
 import { toast } from 'react-toastify';
+import Link from 'next/link';
 
 type SendData = {
   username: string,
-  status: number
+  status: number,
+  team_id: string
 }
 
-export default function Page() {
+export default function Page({ searchParams }: { searchParams: { team_id: string } }) {
   var unameValue: string = "";
   const statusValue: number = 0;
 
@@ -18,9 +20,11 @@ export default function Page() {
   }
 
   const sendInvBtn = async () => {
+    console.log(searchParams.team_id)
     const dataToSend: SendData = {
       username: unameValue,
-      status: statusValue
+      status: statusValue,
+      team_id: searchParams.team_id
     }
     const response = await fetch('api/newMemberReq', {
       method: 'POST',
@@ -44,7 +48,8 @@ export default function Page() {
         <h1>Add a new member to the group</h1>
         <label htmlFor="unamevalue">Username: </label>
         <input type="text" className='text-black' onChange={unameHandler} /> <br />
-        <button onClick={sendInvBtn}>Send Invite</button>
+        <button onClick={sendInvBtn}>Send Invite</button> <br />
+        <Link href={'/'}>Go back</Link>
       </ToastLayout>
     </>
   )
