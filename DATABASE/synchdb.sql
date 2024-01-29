@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2024 at 03:35 AM
+-- Generation Time: Jan 29, 2024 at 04:51 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -66,19 +66,40 @@ CREATE TABLE `requests` (
   `request_type` int(1) NOT NULL,
   `status` int(1) NOT NULL,
   `owner` varchar(255) NOT NULL,
-  `team_id` varchar(255) NOT NULL
+  `team_id` varchar(255) NOT NULL,
+  `req_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `requests`
 --
 
-INSERT INTO `requests` (`send_to`, `sent_from`, `request_type`, `status`, `owner`, `team_id`) VALUES
-('Rodskov', 'Simonde44', 1, 0, 'Rodskov', 'OS_2024'),
-('Polariaris', 'Simonde44', 1, 0, 'Polariaris', 'WD_2024'),
-('Polariaris', 'Rodskov', 1, 0, 'Polariaris', 'WD_2024'),
-('JCI', 'Simonde44', 1, 0, 'JCI', 'OS_2024'),
-('JCI', 'Simonde44', 1, 0, 'JCI', 'WD_2024');
+INSERT INTO `requests` (`send_to`, `sent_from`, `request_type`, `status`, `owner`, `team_id`, `req_id`) VALUES
+('Rodskov', 'Simonde44', 1, 0, 'Rodskov', 'OS_2024', '9R1gawtHW'),
+('Rodskov', 'Polariaris', 1, 0, 'Rodskov', 'OS_2024', 'aD0FEasdT'),
+('Polariaris', 'Simonde44', 1, 0, 'Polariaris', 'WD_2024', 'DzXetKt7/'),
+('Polariaris', 'Rodskov', 1, 0, 'Polariaris', 'WD_2024', 'JX7YInJzd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_details`
+--
+
+CREATE TABLE `request_details` (
+  `req_id` varchar(255) NOT NULL,
+  `req_info` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `request_details`
+--
+
+INSERT INTO `request_details` (`req_id`, `req_info`) VALUES
+('9R1gawtHW', 'Simonde44 has invited you to join Operating Systems'),
+('aD0FEasdT', 'Polariaris has invited you to join Operating Systems'),
+('DzXetKt7/', 'Simonde44 has invited you to join Web Development'),
+('JX7YInJzd', 'Rodskov has invited you to join Web Development');
 
 -- --------------------------------------------------------
 

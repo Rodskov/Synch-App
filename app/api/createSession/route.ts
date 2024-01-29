@@ -14,7 +14,7 @@ export async function POST(req: NextRequest){
             WHERE c.username = '${dataReceived.username}'`;
 
             const conn = mysql2.createConnection(DBConnect())
-            const [rows, fields] = await (await conn).query(query)
+            const [rows, fields] =<any> await (await conn).query(query)
             if(rows[0].pass === dataReceived.password){
                 console.log("Correct password")
                 console.log(rows);

@@ -48,7 +48,7 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                     <ul>
                         {membersData.map((member: any) => (
                             // Add the return statement here
-                            <li key={member.id}>{member.name}</li>
+                            <li key={member.username}>{member.name}</li>
                         ))}
                     </ul>
                     <Link href={`/addNewMember?team_id=${encodeURIComponent(membersData[0].team_id)}`}>Add a new member</Link> <br />

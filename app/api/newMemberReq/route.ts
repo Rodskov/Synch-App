@@ -2,11 +2,19 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import mysql2, {createConnection} from 'mysql2/promise'
 import DBConnect from "../dbConnect/dbConnect";
+import { randomBytes } from "crypto";
 
 export async function POST(req: NextRequest){
     if(req.method === 'POST'){
         const conn = mysql2.createConnection(DBConnect())
         try {
+            const generateRandomBase64 = (length: number): string => {
+            const randomBytesBuffer = randomBytes(Math.ceil((length * 3) / 4));
+            return randomBytesBuffer.toString('base64').slice(0, length);
+            }
+            // Example: Generate a random Base64 string with a length of 10
+            const randomBase64Value = generateRandomBase64(9);
+            console.log(randomBase64Value)
             const cookieValue:any = cookies().get('userloggedin')
             const dataReceived = await req.json()
 
@@ -25,6 +33,12 @@ export async function POST(req: NextRequest){
             const invitationExistQuery = `SELECT r.team_id, r.owner, r.status, r.sent_from FROM requests as r WHERE r.owner = '${dataReceived.username}'`
             const [invitationExistResult] = <any> await (await conn).query(invitationExistQuery);
             console.log(invitationExistResult)
+
+            const teamNameQuery = `SELECT tg.team_name FROM team_groups_name as tg WHERE tg.team_id = '${dataReceived.team_id}'`
+            const [teamNameResult] = <any> await (await conn).query(teamNameQuery)
+            console.log(teamNameResult)
+
+            const inviteMessage: string = `${cookieResult[0].username} has invited you to join ${teamNameResult[0].team_name}`
 
             if(teamMemberResult.length > 0) {
                 if(dataReceived.username == cookieResult[0].username){
@@ -49,9 +63,10 @@ export async function POST(req: NextRequest){
                                     }
                                 }
                             }
-                            const requestQuery = `INSERT INTO requests (send_to, sent_from, request_type, status, owner, team_id) VALUES ('${dataReceived.username}', '${cookieResult[0].username}', 1, ${dataReceived.status}, '${dataReceived.username}', '${dataReceived.team_id}')`
+                            const requestQuery = `INSERT INTO requests (send_to, sent_from, request_type, status, owner, team_id, req_id) VALUES ('${dataReceived.username}', '${cookieResult[0].username}', 1, ${dataReceived.status}, '${dataReceived.username}', '${dataReceived.team_id}', '${randomBase64Value}')`
                             const [requestVar] = await (await conn).query(requestQuery)
-                            console.log(requestVar)
+                            const reqDetailsQuery = `INSERT INTO request_details (req_id, req_info) VALUES ('${randomBase64Value}', '${inviteMessage}')`
+                            const [reqDetailVar] = await (await conn).query(reqDetailsQuery)
                             console.log("Method is correct")
                             return NextResponse.json({receiver: dataReceived.username,
                                                         sender: cookieResult[0].username})
@@ -81,7 +96,8 @@ export async function POST(req: NextRequest){
                         }
                         const requestQuery = `INSERT INTO requests (send_to, sent_from, request_type, status, owner, team_id) VALUES ('${dataReceived.username}', '${cookieResult[0].username}', 1, ${dataReceived.status}, '${dataReceived.username}', '${dataReceived.team_id}')`
                         const [requestVar] = await (await conn).query(requestQuery)
-                        console.log(requestVar)
+                        const reqDetailsQuery = `INSERT INTO request_details (req_id, req_info) VALUES ('${randomBase64Value}', ${inviteMessage})`
+                        const [reqDetailVar] = await (await conn).query(reqDetailsQuery)
                         console.log("Method is correct")
                         return NextResponse.json({receiver: dataReceived.username,
                                                     sender: cookieResult[0].username})

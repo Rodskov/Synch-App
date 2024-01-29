@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 import { ToastContainer } from "react-toastify";
 import ToastLayout from "./components/essentials/toastlayout";
 import NewTeamMember from "./components/client/newTeamMember";
+import Requests from "./components/client/requestsComponent/requests";
 
 
 export default function Home() {
@@ -18,7 +19,8 @@ export default function Home() {
       return(
         <>
           <ToastLayout>
-            <CheckingGroups />
+            <CheckingGroups /> <br />
+            <Requests /> <br />
             <LogoutBtn />
           </ToastLayout>
         </>
