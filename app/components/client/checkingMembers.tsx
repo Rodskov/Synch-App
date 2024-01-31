@@ -34,7 +34,6 @@ export default function CheckingMembers() {
             })
             const result = await response.json();
             data = result;
-            console.log(data);
         } catch (error) {
             console.log(error)
         }

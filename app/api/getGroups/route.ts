@@ -18,14 +18,19 @@ export async function POST(req: NextRequest){
 
             const [userResult, userFields] = await (await conn).query(userQuery);
 
-            const [rows, fields] = await (await conn).query(teamsQuery)
+            const [rows, fields] = <any> await (await conn).query(teamsQuery)
             console.log(rows);
-            const sendData = {
-                groupData: rows,
-                userData: userResult
-            }
+            
 
-            return NextResponse.json(sendData)
+            if(rows.length > 0){
+                const sendData = {
+                    groupData: rows,
+                    userData: userResult
+                }
+                return NextResponse.json(sendData)
+            } else {
+                return NextResponse.json({message: "You are accessing this content without permission"})
+            }
         } catch (error) {
             console.log(error)
         } finally {

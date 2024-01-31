@@ -22,7 +22,6 @@ export default function Home() {
         else{
           setLoading(false)
         }
-        console.log(result.cookieExist)
       }
       checkUserCookies()
     } catch (error) {

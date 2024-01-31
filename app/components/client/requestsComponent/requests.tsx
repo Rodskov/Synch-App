@@ -11,8 +11,6 @@ export default function Requests() {
                 const response = await fetch('/api/getRequests')
                 const result = await response.json()
                 setReqsData(result.requests)
-                console.log(reqsData)
-                console.log(result.requests)
             } catch (error) {
                 
             } finally {
@@ -23,8 +21,7 @@ export default function Requests() {
     }, [])
 
     useEffect(() => {
-        // Log reqsData whenever it changes
-        console.log(reqsData);
+        console.log(reqsData)
     }, [reqsData]);
   return (
     <>

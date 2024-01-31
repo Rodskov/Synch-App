@@ -42,7 +42,6 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                         setOwner(false)
                         setAdmin(false)
                     }
-                    console.log(accessResult)
                 }
                 const response = await fetch('/api/getMembers', {
                     method: 'POST',
@@ -56,7 +55,6 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                     if(result[0]?.username != undefined){
                         setMembersData(result);
                         setAuthData(true)
-                        console.log(result);
                     }
                     if(result.authenticaed !== undefined){
                         setAuthData(result.message)
@@ -72,7 +70,6 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
             }
         };
         getTeamData();
-        console.log(searchParams.data);
     }, []);
 
     return (
@@ -92,7 +89,6 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                     <h1>Members: </h1>
                     <ul>
                         {membersData.map((member: any) => (
-                            // Add the return statement here
                             <li key={member.username}>{member.name}</li>
                         ))}
                     </ul>

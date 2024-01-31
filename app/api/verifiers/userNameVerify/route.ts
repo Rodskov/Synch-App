@@ -1,6 +1,6 @@
 import mysql2 from 'mysql2/promise'
 import { NextRequest, NextResponse } from 'next/server';
-import DBConnect from '../dbConnect/dbConnect';
+import DBConnect from '../../dbConnect/dbConnect';
 
 export async function POST(req: NextRequest){
     const dataReceived = await req.json()

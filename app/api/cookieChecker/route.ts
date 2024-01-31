@@ -5,7 +5,11 @@ export async function GET(req: NextRequest){
     if( req.method === 'GET'){
         try {
             const cookieValue: any = cookies().get("userloggedin")
-            return NextResponse.json(cookieValue.value)
+            if(cookieValue !== undefined){
+                return NextResponse.json(cookieValue.value)
+            }else{
+                return NextResponse.json("")
+            }
         } catch (error) {
             console.log(error)
         }

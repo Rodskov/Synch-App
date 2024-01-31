@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2024 at 03:44 PM
+-- Generation Time: Jan 31, 2024 at 06:15 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -99,7 +99,14 @@ INSERT INTO `requests` (`send_to`, `sent_from`, `request_type`, `status`, `owner
 ('Rodskov', 'Simonde44', 1, 0, 'Rodskov', 'OS_2024', '9R1gawtHW'),
 ('Rodskov', 'Polariaris', 1, 0, 'Rodskov', 'OS_2024', 'aD0FEasdT'),
 ('Polariaris', 'Simonde44', 1, 0, 'Polariaris', 'WD_2024', 'DzXetKt7/'),
-('Polariaris', 'Rodskov', 1, 0, 'Polariaris', 'WD_2024', 'JX7YInJzd');
+('Polariaris', 'Rodskov', 1, 0, 'Polariaris', 'WD_2024', 'JX7YInJzd'),
+('Simonde44', 'Polariaris', 1, 0, 'Simonde44', 'FORP_2024', 'mvz5qOUbb'),
+('Simonde44', 'Polariaris', 1, 0, 'Simonde44', 'FSHR_212', '3eZNjcLrz'),
+('Simonde44', 'Polariaris', 1, 0, 'Simonde44', 'CSI_2024', 'gTwTK2G5u'),
+('Simonde44', 'Polariaris', 1, 0, 'Simonde44', 'CrimLaw_2024', 'Ygj7s4uHO'),
+('Polariaris', 'Simonde44', 1, 0, 'Polariaris', 'LCD_2024', '7I/fryCvL'),
+('Rodskov', 'Polariaris', 1, 0, 'Rodskov', 'CSI_2024', '5cqVccdcf'),
+('Rodskov', 'Polariaris', 1, 0, 'Rodskov', 'CrimLaw_2024', 'zYtovrIdU');
 
 -- --------------------------------------------------------
 
@@ -120,7 +127,14 @@ INSERT INTO `request_details` (`req_id`, `req_info`) VALUES
 ('9R1gawtHW', 'Simonde44 has invited you to join Operating Systems'),
 ('aD0FEasdT', 'Polariaris has invited you to join Operating Systems'),
 ('DzXetKt7/', 'Simonde44 has invited you to join Web Development'),
-('JX7YInJzd', 'Rodskov has invited you to join Web Development');
+('JX7YInJzd', 'Rodskov has invited you to join Web Development'),
+('mvz5qOUbb', 'Polariaris has invited you to join Forensic Photography'),
+('3eZNjcLrz', 'Polariaris has invited you to join Human Rights'),
+('gTwTK2G5u', 'Polariaris has invited you to join Crime Scene Investigation'),
+('Ygj7s4uHO', 'Polariaris has invited you to join Criminal Law'),
+('7I/fryCvL', 'Simonde44 has invited you to join Logic Circuits and Design'),
+('5cqVccdcf', 'Polariaris has invited you to join Crime Scene Investigation'),
+('zYtovrIdU', 'Polariaris has invited you to join Criminal Law');
 
 -- --------------------------------------------------------
 
@@ -193,7 +207,12 @@ INSERT INTO `team_groups_name` (`team_name`, `team_id`) VALUES
 ('Operating Systems', 'OS_2024'),
 ('Web Development', 'WD_2024'),
 ('Control Systems', 'FCS_2024'),
-('Data and Digital Communications', 'DDC_2024');
+('Data and Digital Communications', 'DDC_2024'),
+('Forensic Photography', 'FORP_2024'),
+('Crime Scene Investigation', 'CSI_2024'),
+('Criminal Law', 'CrimLaw_2024'),
+('Logic Circuits and Design', 'LCD_2024'),
+('Human Rights', 'FSHR_212');
 
 -- --------------------------------------------------------
 
@@ -226,7 +245,12 @@ INSERT INTO `team_members_list` (`user_id`, `team_id`, `access_level`) VALUES
 ('Polariaris', 'OS_2024', 0),
 ('Rodskov', 'WD_2024', 0),
 ('Polariaris', 'WD_2024', 3),
-('Simonde44', 'WD_2024', 2);
+('Simonde44', 'WD_2024', 2),
+('Polariaris', 'FORP_2024', 3),
+('Polariaris', 'CSI_2024', 3),
+('Polariaris', 'CrimLaw_2024', 3),
+('Simonde44', 'LCD_2024', 3),
+('Polariaris', 'FSHR_212', 3);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

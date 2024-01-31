@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ToastLayout from '../components/essentials/toastlayout';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type SendData = {
   username: string,
@@ -11,6 +12,7 @@ type SendData = {
 }
 
 export default function Page({ searchParams }: { searchParams: { team_id: string } }) {
+  const router = useRouter()
   const [owner, setOwner] = useState<any>(null)
   const [admin, setAdmin] = useState<any>(null)
   const [userAuthenticated, setUserAuthenticated] = useState<any>(null)
@@ -49,7 +51,6 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
             setOwner(false)
             setAdmin(false)
         }
-        console.log(accessResult)
       }
         const response = await fetch('/api/authentication/checkUserCreds', {
           method: "POST",
@@ -60,7 +61,6 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
         })
         const credsResult = await response.json()
         setUserAuthenticated(credsResult.authenticated)
-        console.log(credsResult)
       } catch (error) {
         console.log(error)
       } finally {
@@ -73,11 +73,9 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
 
   const unameHandler = (event: any) => {
     unameValue = event.target.value
-    console.log(unameValue)
   }
 
   const sendInvBtn = async () => {
-    console.log(searchParams.team_id)
     const dataToSend: SendData = {
       username: unameValue,
       status: statusValue,
@@ -94,8 +92,8 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
     if(result.receiver !== undefined){
       console.log(result.receiver)
       toast.success("Invitation is sent to " + result.receiver)
+      setTimeout(() => { router.push('/dashboard') }, 2000)
     } else if(result.message !== undefined){
-      console.log(result.message)
       toast.error(result.message)
     }
   }

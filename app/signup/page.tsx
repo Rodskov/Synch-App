@@ -24,7 +24,6 @@ const SignUp = () => {
 
     const nameHandler = (event: any) => {
         nameValue = event.target.value
-        console.log(event.target.value)
     }
 
     const unameHandler = async (event: any) => {
@@ -32,7 +31,7 @@ const SignUp = () => {
         const dataToSend = {
             unameVerify: unameValue
         }
-        const response = await fetch('api/userNameVerify', {
+        const response = await fetch('api/verifiers/userNameVerify', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -47,23 +46,18 @@ const SignUp = () => {
             unameValue = ""
             event.target.value = ""
         }
-        console.log(result)
-        console.log(event.target.value)
     }
     
     const orgHandler = (event: any) => {
         orgValue = event.target.value
-        console.log(event.target.value)
     }
 
     const passHandler = (event: any) => {
         passValue = event.target.value
-        console.log(passValue)
     }
 
     const passVerifyHandler = (event: any) => {
         passVerifyValue = event.target.value
-        console.log(passVerifyValue)
     }
 
     const submit = async () => {

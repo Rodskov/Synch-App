@@ -1,6 +1,7 @@
  'use client';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { json } from 'stream/consumers';
 
 type UserData = {
@@ -31,9 +32,13 @@ export default function CheckingGroups() {
 
         if (response.ok) {
           const result = await response.json();
-          console.log(result)
-          setGroupsData(result.groupData);
-          setUserData(result.userData)
+          if(result.groupData !== undefined && result.userData !== undefined){
+            setGroupsData(result.groupData);
+            setUserData(result.userData)
+          }
+          if(result.message !== undefined){
+            toast.error(result.message)
+          }
         } else {
           console.error('Error:', response.status, response.statusText);
         }
@@ -50,7 +55,12 @@ export default function CheckingGroups() {
   return (
     <div>
       {loading && <p>Loading...</p>}
-      {!loading && (!groupsData || groupsData.length === 0) && (
+      {!loading && !groupsData && !userData && (
+        <>
+          <h1>You do not have access to this content.</h1>
+        </>
+      )}
+      {!loading && (!groupsData || groupsData.length === 0) && userData && (
         <p>
           <h1>Name: {userData[0]?.name}</h1>
           No teams joined
