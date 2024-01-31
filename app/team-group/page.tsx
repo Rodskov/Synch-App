@@ -3,6 +3,8 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
 export default function Page({ searchParams }: { searchParams: { data: string } }) {
+    const [owner, setOwner] = useState<any>(null)
+    const [admin, setAdmin] = useState<any>(null)
     const [membersData, setMembersData] = useState<any>(null);
     const [authData, setAuthData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
@@ -10,10 +12,38 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
     useEffect(() => {
         const getTeamData = async () => {
             var result: any = "";
+            
             try {
                 const dataToSend = {
                     team_id: searchParams.data,
                 };
+                const accessResponse = await fetch('/api/authentication/accessLevel', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dataToSend)
+                })
+                if(accessResponse.ok){
+                    const accessResult = await accessResponse.json()
+                    if(accessResult[0] !== undefined){
+                        if(accessResult[0].access_level == 3){
+                            setOwner(true)
+                            setAdmin(true)
+                        } else if(accessResult[0].access_level == 2){
+                            setOwner(false)
+                            setAdmin(true)
+                        } else {
+                            setOwner(false)
+                            setAdmin(false)
+                        }
+                    }
+                    else{
+                        setOwner(false)
+                        setAdmin(false)
+                    }
+                    console.log(accessResult)
+                }
                 const response = await fetch('/api/getMembers', {
                     method: 'POST',
                     headers: {
@@ -67,7 +97,16 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                         ))}
                     </ul>
                     <br />
-                    <Link href={`/addNewMember?team_id=${encodeURIComponent(membersData[0].team_id)}`}>Add a new member</Link> <br />
+                    {owner && admin && (
+                        <>
+                            <Link href={`/addNewMember?team_id=${encodeURIComponent(membersData[0].team_id)}`}>Add a new member</Link> <br />
+                        </>
+                    )}
+                    {!owner && admin && (
+                        <>
+                            <Link href={`/addNewMember?team_id=${encodeURIComponent(membersData[0].team_id)}`}>Add a new member</Link> <br />
+                        </>
+                    )}
                     <Link href={'/'}>Go back</Link>
                 </>
             )}

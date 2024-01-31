@@ -5,6 +5,7 @@ import React from 'react'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ToastLayout from '../components/essentials/toastlayout';
+import { useRouter } from 'next/navigation';
 
 type UserData = {
     name: String,
@@ -14,6 +15,7 @@ type UserData = {
 }
 
 const SignUp = () => {
+    const router: any = useRouter()
     var nameValue: String = "";
     var unameValue: String = "";
     var passValue: String = "";
@@ -73,7 +75,6 @@ const SignUp = () => {
         }
         try {
             if(passValue == passVerifyValue && nameValue != "" && unameValue != "" && passValue != "" && orgValue != ""){
-                toast.success("Account successfully created!")
                 const response = await fetch('/api/userSignUp', {
                     method: 'POST',
                     headers: {
@@ -81,7 +82,8 @@ const SignUp = () => {
                     },
                     body: JSON.stringify(dataToSend)
                 })
-                setTimeout(() => { window.location.href = "/" }, 1000)
+                toast.success("Account successfully created!")
+                setTimeout(() => { router.push('/') }, 1000)
             } else if(passValue != passVerifyValue){
                 toast.error('Passwords do not match.')
             }

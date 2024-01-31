@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2024 at 04:51 PM
+-- Generation Time: Jan 31, 2024 at 03:44 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `synchdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `access_types`
+--
+
+CREATE TABLE `access_types` (
+  `access_level` int(2) NOT NULL,
+  `access_desc` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `access_types`
+--
+
+INSERT INTO `access_types` (`access_level`, `access_desc`) VALUES
+(3, 'Owner'),
+(2, 'Administrator'),
+(1, 'Member');
 
 -- --------------------------------------------------------
 
@@ -52,7 +72,8 @@ INSERT INTO `clients_users` (`name`, `username`, `id`, `organization`) VALUES
 ('John Smith', 'JS', 'sTO+uy/LGezTfPRc8w4D', 'MI6'),
 ('Johnny C. Isla', 'JCI', '8nc8Y+0mMsTwUktFA8hn', 'Wattpad'),
 ('Bigmom Kaido', 'onigashima', 'tFJutWcLzYrlo3LdoL6KU62mqwHYVkK1crFqKWvhzKV+D/De5J', 'one piece'),
-('Sample', 'HelloSample', 'BXvsYuIe9xV3nWXQLTzddGXg2DoDRckf2N9lALx5/NTbxS+IQs', 'PUP');
+('Sample', 'HelloSample', 'BXvsYuIe9xV3nWXQLTzddGXg2DoDRckf2N9lALx5/NTbxS+IQs', 'PUP'),
+('SampleHere', '1234', 's+jlqBs4MnY3UAU3RU+a8pJPOx+Q1UntttDo7ReReO/HyqU64L', 'PUP');
 
 -- --------------------------------------------------------
 
@@ -147,7 +168,11 @@ INSERT INTO `secret_creds` (`user_id`, `pass`) VALUES
 ('JS', 'qwer'),
 ('JCI', 'zxcv'),
 ('onigashima', 'cherry'),
-('HelloSample', 'asdf');
+('HelloSample', 'asdf'),
+('1234', 'zxcv'),
+('asdf', 'zxcv'),
+('asdfasdf', 'asdf'),
+('asdf', 'asdf');
 
 -- --------------------------------------------------------
 
@@ -178,29 +203,30 @@ INSERT INTO `team_groups_name` (`team_name`, `team_id`) VALUES
 
 CREATE TABLE `team_members_list` (
   `user_id` varchar(255) NOT NULL,
-  `team_id` varchar(255) NOT NULL
+  `team_id` varchar(255) NOT NULL,
+  `access_level` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `team_members_list`
 --
 
-INSERT INTO `team_members_list` (`user_id`, `team_id`) VALUES
-('4321', 'OS_2024'),
-('Sim44', 'OS_2024'),
-('Sim44', 'WD_2024'),
-('4321', 'FCS_2024'),
-('Sim44', 'FCS_2024'),
-('Sim44', 'DDC_2024'),
-('elle', 'FCS_2024'),
-('elle', 'WD_2024'),
-('LDM', 'OS_2024'),
-('0505', 'OS_2024'),
-('Simonde44', 'OS_2024'),
-('Simonde44', 'WD_2024'),
-('User_Real_99', 'WD_2024'),
-('Polariaris', 'OS_2024'),
-('Rodskov', 'WD_2024');
+INSERT INTO `team_members_list` (`user_id`, `team_id`, `access_level`) VALUES
+('4321', 'OS_2024', 0),
+('Sim44', 'OS_2024', 0),
+('Sim44', 'WD_2024', 0),
+('4321', 'FCS_2024', 0),
+('Sim44', 'FCS_2024', 0),
+('Sim44', 'DDC_2024', 0),
+('elle', 'FCS_2024', 0),
+('elle', 'WD_2024', 0),
+('LDM', 'OS_2024', 0),
+('0505', 'OS_2024', 0),
+('User_Real_99', 'WD_2024', 0),
+('Polariaris', 'OS_2024', 0),
+('Rodskov', 'WD_2024', 0),
+('Polariaris', 'WD_2024', 3),
+('Simonde44', 'WD_2024', 2);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

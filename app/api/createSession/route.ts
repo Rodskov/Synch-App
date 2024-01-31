@@ -18,7 +18,6 @@ export async function POST(req: NextRequest){
             if(rows[0].pass === dataReceived.password){
                 console.log("Correct password")
                 console.log(rows);
-
                 cookies().set({
                     name: 'userloggedin',
                     value: `${rows[0].id}`,
@@ -26,10 +25,10 @@ export async function POST(req: NextRequest){
                     path: '/'
                 })
 
-                return NextResponse.json({Status: "Server responded with status 200"})
+                return NextResponse.json({success: "Server responded with status 200"})
             }else{
                 console.log("Wrong password")
-                return NextResponse.json({Server: "Wrong Password"})
+                return NextResponse.json({error: "Wrong Password"})
             }
         } catch (error) {
             console.log(error)

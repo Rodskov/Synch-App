@@ -36,7 +36,7 @@ export default function Home() {
         <>
         <ToastLayout>
           <LogIn />
-          <Link href={'/userSignUp'}>Sign up</Link>
+          <Link href={'/signup'}>Sign up</Link>
         </ToastLayout>
         </>
         )}

@@ -10,7 +10,7 @@ export async function POST(req: NextRequest){
             const userLoggedIn = <any> cookies().get('userloggedin');
             const dataReceived = await req.json();
             console.log(dataReceived)
-            const query = `SELECT c.name, c.id, tg.team_name, tg.team_id, c.username
+            const query = `SELECT c.name, c.id, tg.team_name, tg.team_id, tm.access_level, c.username
             FROM team_groups_name as tg
             JOIN team_members_list as tm ON tm.team_id = tg.team_id
             JOIN clients_users as c ON tm.user_id = c.username
@@ -19,6 +19,7 @@ export async function POST(req: NextRequest){
             var idArray: any = [];
             var dataArray: any = [];
             const [queryResult] = <any> await (await conn).query(query)
+            //console.log(queryResult)
 
             for(var i=0; i<queryResult.length; i++){
                 const sendBackData = {
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest){
                     username: queryResult[i].username
                 }
                 dataArray.push(sendBackData)
-                console.log(dataArray)
+                //console.log(dataArray)
             }
 
             

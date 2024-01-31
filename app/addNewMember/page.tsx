@@ -11,6 +11,8 @@ type SendData = {
 }
 
 export default function Page({ searchParams }: { searchParams: { team_id: string } }) {
+  const [owner, setOwner] = useState<any>(null)
+  const [admin, setAdmin] = useState<any>(null)
   const [userAuthenticated, setUserAuthenticated] = useState<any>(null)
   const [loading, setLoading] = useState<any>(true)
   var unameValue: string = "";
@@ -22,6 +24,33 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
         const dataSend: any = {
           team_id: searchParams.team_id
         }
+        const accessResponse = await fetch('/api/authentication/accessLevel', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dataSend)
+      })
+      if(accessResponse.ok){
+        const accessResult = await accessResponse.json()
+        if(accessResult[0] !== undefined){
+            if(accessResult[0].access_level == 3){
+                setOwner(true)
+                setAdmin(true)
+            } else if(accessResult[0].access_level == 2){
+                setOwner(false)
+                setAdmin(true)
+            } else {
+                setOwner(false)
+                setAdmin(false)
+            }
+        }
+        else{
+            setOwner(false)
+            setAdmin(false)
+        }
+        console.log(accessResult)
+      }
         const response = await fetch('/api/authentication/checkUserCreds', {
           method: "POST",
           headers: {
@@ -71,6 +100,18 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
     }
   }
 
+  const componentRender = () => {
+    return(
+      <div>
+        <h1>Add a new member to the group</h1>
+        <label htmlFor="unamevalue">Username: </label>
+        <input type="text" className='text-black' onChange={unameHandler} /> <br />
+        <button onClick={sendInvBtn}>Send Invite</button> <br />
+        <Link href={'/'}>Go back</Link>
+      </div>
+    )
+  }
+
   return (
     <>
       <ToastLayout>
@@ -85,14 +126,17 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
             <Link href={'/'}>Go back</Link>
         </p>
         )}
-        {!loading && userAuthenticated && (
-          <div>
-            <h1>Add a new member to the group</h1>
-            <label htmlFor="unamevalue">Username: </label>
-            <input type="text" className='text-black' onChange={unameHandler} /> <br />
-            <button onClick={sendInvBtn}>Send Invite</button> <br />
+        {!loading && !owner && !admin && (
+          <p>
+            You do not have access to this content. <br />
             <Link href={'/'}>Go back</Link>
-          </div>
+        </p>
+        )}
+        {!loading && userAuthenticated && owner && admin && (
+          componentRender()
+        )}
+        {!loading && userAuthenticated && !owner && admin && (
+          componentRender()
         )}
       </ToastLayout>
     </>

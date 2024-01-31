@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import React from 'react'
+import { toast } from 'react-toastify';
 
  
 type UserData = {
@@ -36,7 +37,12 @@ const LogIn = () => {
                 body: JSON.stringify(dataToSend)
             })
             const result = await response.json()
-            router.push('/dashboard')
+            if(result.success !== undefined){
+                router.push('/dashboard')
+            }
+            if(result.error !== undefined){
+                toast.error("Wrong Password or Username")
+            }
             console.log(result)
         } catch (error) {
             console.log(error)
