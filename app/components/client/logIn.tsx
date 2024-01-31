@@ -1,12 +1,15 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
+ 
 type UserData = {
     username: String,
     password: String
 }
 
 const LogIn = () => {
+    const router: any = useRouter()
     var unameValue: string = "";
     var passValue: string = "";
     const unameHandler = (event: any) => {
@@ -33,7 +36,7 @@ const LogIn = () => {
                 body: JSON.stringify(dataToSend)
             })
             const result = await response.json()
-            window.location.href = "/"
+            router.push('/dashboard')
             console.log(result)
         } catch (error) {
             console.log(error)

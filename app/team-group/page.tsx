@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function Page({ searchParams }: { searchParams: { data: string } }) {
     const [membersData, setMembersData] = useState<any>(null);
+    const [authData, setAuthData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -22,8 +23,15 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                 });
                 if (response.ok) {
                     result = await response.json();
-                    setMembersData(result);
-                    console.log(result);
+                    if(result[0]?.username != undefined){
+                        setMembersData(result);
+                        setAuthData(true)
+                        console.log(result);
+                    }
+                    if(result.authenticaed !== undefined){
+                        setAuthData(result.message)
+                        console.log(result)
+                    }
                 } else {
                     console.error('Error: ', response.status);
                 }
@@ -40,10 +48,17 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
     return (
         <div>
             {loading && <p>Data loading...</p>}
-            {!loading && !membersData && <p>No data found...</p>}
-            {!loading && membersData && (
+            {!loading && !authData && !membersData && (
+                <p>
+                    You do not have access to this content... <br />
+                    <Link href={'/'}>
+                        <button>Go Back</button>
+                    </Link>
+                </p>
+            )}
+            {!loading && membersData && authData && (
                 <>
-                    <h1>Team Name: {searchParams.data}</h1>
+                    <h1>Team Name: <br /> {searchParams.data}</h1> <br />
                     <h1>Members: </h1>
                     <ul>
                         {membersData.map((member: any) => (
@@ -51,6 +66,7 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                             <li key={member.username}>{member.name}</li>
                         ))}
                     </ul>
+                    <br />
                     <Link href={`/addNewMember?team_id=${encodeURIComponent(membersData[0].team_id)}`}>Add a new member</Link> <br />
                     <Link href={'/'}>Go back</Link>
                 </>

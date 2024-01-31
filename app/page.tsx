@@ -1,42 +1,45 @@
+'use client';
 import Link from "next/link";
-import LogoutBtn from "./components/client/buttons/logout";
-import CheckingGroups from "./components/client/checkingGroups";
-import CheckingMembers from "./components/client/checkingMembers";
 import LogIn from "./components/client/logIn";
-import { cookies } from "next/headers";
-import { ToastContainer } from "react-toastify";
 import ToastLayout from "./components/essentials/toastlayout";
-import NewTeamMember from "./components/client/newTeamMember";
-import Requests from "./components/client/requestsComponent/requests";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
 export default function Home() {
-  
-  try {
-    const result: any = cookies().get('userloggedin')
-    if(result !== undefined){
-      console.log(result)
-      return(
-        <>
-          <ToastLayout>
-            <CheckingGroups /> <br />
-            <Requests /> <br />
-            <LogoutBtn />
-          </ToastLayout>
-        </>
-      )
+  const [cookieExists, setCookieExists] = useState<any>(null)
+  const [loading, setLoading] = useState<any>(true)
+  const router = useRouter()
+  useEffect(() => {
+    try {
+      const checkUserCookies = async () => {
+        const response = await fetch('/api/authentication/homePageCreds')
+        const result = await response.json()
+        setCookieExists(result.cookieExist)
+        if(result.cookieExist == true){
+          router.push('/dashboard')
+        }
+        else{
+          setLoading(false)
+        }
+        console.log(result.cookieExist)
+      }
+      checkUserCookies()
+    } catch (error) {
+      console.log(error)
     }
-    else{
-      return(
+  }, [])
+  return(
+    <>
+        {loading}
+        {!loading && !cookieExists && (
         <>
-          <ToastLayout>
-            <LogIn />
-            <Link href={'/signup'}>Sign Up</Link>
-          </ToastLayout>
+        <ToastLayout>
+          <LogIn />
+          <Link href={'/userSignUp'}>Sign up</Link>
+        </ToastLayout>
         </>
-      )
-    }
-  } catch (error) {
-    
-  }
+        )}
+    </>
+  )
 }
