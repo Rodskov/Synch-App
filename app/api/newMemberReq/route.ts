@@ -102,9 +102,9 @@ export async function POST(req: NextRequest){
                                     }
                                 }
                             }
-                            const requestQuery = `INSERT INTO requests (send_to, sent_from, request_type, status, owner, team_id) VALUES ('${dataReceived.username}', '${cookieResult[0].username}', 1, ${dataReceived.status}, '${dataReceived.username}', '${dataReceived.team_id}')`
+                            const requestQuery = `INSERT INTO requests (send_to, sent_from, request_type, status, owner, team_id, req_id) VALUES ('${dataReceived.username}', '${cookieResult[0].username}', 1, ${dataReceived.status}, '${dataReceived.username}', '${dataReceived.team_id}', '${randomBase64Value}')`
                             const [requestVar] = await (await conn).query(requestQuery)
-                            const reqDetailsQuery = `INSERT INTO request_details (req_id, req_info) VALUES ('${randomBase64Value}', ${inviteMessage})`
+                            const reqDetailsQuery = `INSERT INTO request_details (req_id, req_info) VALUES ('${randomBase64Value}', '${inviteMessage}')`
                             const [reqDetailVar] = await (await conn).query(reqDetailsQuery)
                             console.log("Method is correct")
                             return NextResponse.json({receiver: dataReceived.username,

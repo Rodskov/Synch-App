@@ -16,13 +16,14 @@ export async function POST(req: NextRequest){
 
             const userQuery = `SELECT c.name FROM clients_users as c WHERE c.id = '${dataReceived.user_id}'`
 
-            const [userResult, userFields] = await (await conn).query(userQuery);
+            const [userResult, userFields] = <any> await (await conn).query(userQuery);
+            console.log("User result: ", userResult)
 
             const [rows, fields] = <any> await (await conn).query(teamsQuery)
             console.log(rows);
             
 
-            if(rows.length > 0){
+            if(rows.length > 0 || userResult.length > 0){
                 const sendData = {
                     groupData: rows,
                     userData: userResult

@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 export default function Requests() {
@@ -8,7 +9,7 @@ export default function Requests() {
     useEffect(() => {
         const checkReq = async () => {
             try {
-                const response = await fetch('/api/getRequests')
+                const response = await fetch('/api/requests/getRequests')
                 const result = await response.json()
                 setReqsData(result.requests)
             } catch (error) {
@@ -31,11 +32,13 @@ export default function Requests() {
                 No Requests as of Now...
             </p>
         )}
-        {!loading && reqsData && reqsData.length > 0 && (
+        {!loading && reqsData && reqsData.length > 0 &&(
     <ul>
         {reqsData.map((reqs: any) => (
             <div key={reqs.req_id}>
-                - {reqs.req_info}
+                {reqs.status === 0 && (
+                <Link href={`/user/messageDetails?req_id=${encodeURIComponent(reqs.req_id)}`}>{reqs.sent_from} - {reqs.team_id} </Link>
+                )}
             </div>
         ))}
     </ul>

@@ -15,12 +15,10 @@ const LogIn = () => {
     var unameValue: string = "";
     var passValue: string = "";
     const unameHandler = (event: any) => {
-        console.log(event.target.value)
         unameValue = event.target.value
     }
 
     const passHandler = (event: any) => {
-        console.log(event.target.value)
         passValue = event.target.value
     }
 
@@ -43,7 +41,7 @@ const LogIn = () => {
                     setTimeout(() => { router.push('/dashboard') }, 500)
                 }
                 if(result.error !== undefined){
-                    toast.error("Wrong Password or Username")
+                    toast.error(result.error)
                 }
                 console.log(result)
             } catch (error) {

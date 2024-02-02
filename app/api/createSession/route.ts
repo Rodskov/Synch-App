@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "@/node_modules/next/server";
 import { cookies } from 'next/headers'
 import mysql2 from 'mysql2/promise'
 import DBConnect from "../dbConnect/dbConnect";
+import bcrypt from 'bcrypt'
 
 export async function POST(req: NextRequest){
     if( req.method === 'POST'){
@@ -14,21 +15,32 @@ export async function POST(req: NextRequest){
             WHERE c.username = '${dataReceived.username}'`;
 
             const conn = mysql2.createConnection(DBConnect())
-            const [rows, fields] =<any> await (await conn).query(query)
-            if(rows[0].pass === dataReceived.password){
-                console.log("Correct password")
-                console.log(rows);
-                cookies().set({
-                    name: 'userloggedin',
-                    value: `${rows[0].id}`,
-                    httpOnly: true,
-                    path: '/'
-                })
+            
+            const [rows] =<any> await (await conn).query(query)
+            console.log(rows.length)
 
-                return NextResponse.json({success: "Server responded with status 200"})
+            if(rows.length > 0){
+                const isPassTheSame = await bcrypt.compare(dataReceived.password, rows[0].pass)
+                console.log("Value: ",isPassTheSame)
+
+                console.log(rows.length)
+                if(isPassTheSame == true){
+                    console.log("Correct password")
+                    console.log(rows);
+                    cookies().set({
+                        name: 'userloggedin',
+                        value: `${rows[0].id}`,
+                        httpOnly: true,
+                        path: '/'
+                    })
+    
+                    return NextResponse.json({success: "Server responded with status 200"})
+                }else{
+                    console.log("Wrong password")
+                    return NextResponse.json({error: "Wrong Password"})
+                }
             }else{
-                console.log("Wrong password")
-                return NextResponse.json({error: "Wrong Password"})
+                return NextResponse.json({error: "Username or Password is wrong"})
             }
         } catch (error) {
             console.log(error)

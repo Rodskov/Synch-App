@@ -31,7 +31,7 @@ export default function Dashboard() {
           {userCookie && (
             <>
               <CheckingGroups /> <br />
-              <Requests /> <br />
+              <Link href={'/user/messages'}>Check messages</Link> <br />
               <Link href={'/createNewTeam'}>Create a team</Link> <br />
               <LogoutBtn />
             </>
