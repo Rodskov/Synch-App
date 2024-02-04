@@ -9,6 +9,7 @@ export default function MessageDetails({ searchParams }: { searchParams: { req_i
     const router = useRouter()
     const [authenticated, setAuthenticated] = useState<any>(false)
     const [requestDetails, setRequestDetails] = useState<any>(null)
+    const [loading, setLoading] = useState<any>(true)
     useEffect(() => {
         const checkUserDetail = async () => {
             try {
@@ -23,9 +24,7 @@ export default function MessageDetails({ searchParams }: { searchParams: { req_i
                     body: JSON.stringify(dataSend)
                 })
                 const result = await response.json()
-                console.log(result)
                 setAuthenticated(result.authenticated)
-                console.log(authenticated)
             } catch (error) {
                 
             }
@@ -51,6 +50,8 @@ export default function MessageDetails({ searchParams }: { searchParams: { req_i
                 }
             } catch (error) {
                 
+            } finally {
+                setLoading(false)
             }
         }
         fetchDataFromDB()
@@ -79,12 +80,12 @@ export default function MessageDetails({ searchParams }: { searchParams: { req_i
                 body: JSON.stringify(dataSend)
             })
             const result = await response.json()
+            toast.success(result)
             setTimeout(() => { router.push('/dashboard') }, 2000)
             const acceptBtnRef:any = document.getElementById('acceptBtn')
             const declineBtnRef:any = document.getElementById('declinetBtn')
             acceptBtnRef.disabled = true
             declineBtnRef.disabled = true
-            toast.success(result)
         } catch (error) {
             
         }
@@ -104,12 +105,12 @@ export default function MessageDetails({ searchParams }: { searchParams: { req_i
                 body: JSON.stringify(dataSend)
             })
             const result = await response.json()
+            toast.error(result)
             setTimeout(() => { router.push('/dashboard') }, 2000)
             const acceptBtnRef:any = document.getElementById('acceptBtn')
             const declineBtnRef:any = document.getElementById('declinetBtn')
             acceptBtnRef.disabled = true
             declineBtnRef.disabled = true
-            toast.error(result)
         } catch (error) {
             
         }
@@ -118,13 +119,18 @@ export default function MessageDetails({ searchParams }: { searchParams: { req_i
   return (
     <>
         <ToastLayout>
-            {!authenticated && (
+            {loading && (
+                <>
+                    Loading. Please Wait.
+                </>
+            )}
+            {!authenticated && !loading && (
                 <>
                     You do not have access to this content. <br />
                     <Link href={'/'}>Go back</Link>
                 </>
             )}
-            {requestDetails && authenticated && (
+            {!loading && requestDetails && authenticated && (
                 <div>
                     Message: <br />
                     {requestDetails[0].req_info}

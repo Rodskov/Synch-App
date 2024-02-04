@@ -72,7 +72,7 @@ export default function CheckingGroups() {
           <h1>Groups:</h1>
           <ul>
             {groupsData.map((group: any) => (
-              <Link key={group.team_id} href={`/team-group?data=${encodeURIComponent(group.team_name)}`}>
+              <Link key={group.team_id} href={`/team-group?data=${encodeURIComponent(group.team_id)}`}>
                 <li>- {group.team_name}</li>
               </Link>
             ))}

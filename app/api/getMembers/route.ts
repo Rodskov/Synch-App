@@ -14,7 +14,7 @@ export async function POST(req: NextRequest){
             FROM team_groups_name as tg
             JOIN team_members_list as tm ON tm.team_id = tg.team_id
             JOIN clients_users as c ON tm.user_id = c.username
-            WHERE tg.team_name = '${dataReceived.team_id}'`;
+            WHERE tg.team_id = '${dataReceived.team_id}'`;
 
             var idArray: any = [];
             var dataArray: any = [];

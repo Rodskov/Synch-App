@@ -97,6 +97,9 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
       toast.error(result.message)
     }
   }
+  const backBtn = () => {
+    router.back()
+  }
 
   const componentRender = () => {
     return(
@@ -105,7 +108,7 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
         <label htmlFor="unamevalue">Username: </label>
         <input type="text" className='text-black' onChange={unameHandler} /> <br />
         <button onClick={sendInvBtn}>Send Invite</button> <br />
-        <Link href={'/'}>Go back</Link>
+        <button onClick={backBtn}>Go Back</button>
       </div>
     )
   }
