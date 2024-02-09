@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import Tasks from '../components/client/tasks/tasks';
+import { useRouter } from 'next/navigation';
 
 export default function Page({ searchParams }: { searchParams: { data: string } }) {
     const [owner, setOwner] = useState<any>(null)
@@ -11,6 +12,7 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
     const [membersData, setMembersData] = useState<any>(null);
     const [authData, setAuthData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const router = useRouter()
 
     useEffect(() => {
         const getTasks = async () => {
@@ -114,6 +116,14 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
         getTeamData();
     }, []);
 
+    const addNewTaskFunc = () => {
+        router.push(`/addTask?team_id=${encodeURIComponent(searchParams.data)}`)
+    }
+
+    const addNewMemberFunc = () => {
+        router.push(`/addNewMember?team_id=${encodeURIComponent(searchParams.data)}`)
+    }
+
     return (
         <div>
             {loading && <p>Data loading...</p>}
@@ -137,7 +147,8 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                     <br />
                     {(owner || admin) && (
                         <>
-                            <Link href={`/addNewMember?team_id=${encodeURIComponent(membersData[0].team_id)}`}>Add a new member</Link> <br />
+                            <button onClick={addNewMemberFunc}>Add new member</button> <br />
+                            <button onClick={addNewTaskFunc}>Add Task</button> <br />
                         </>
                     )}
                     <Link href={'/'}>Go back</Link>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2024 at 06:15 PM
+-- Generation Time: Feb 09, 2024 at 03:52 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -59,21 +59,11 @@ CREATE TABLE `clients_users` (
 --
 
 INSERT INTO `clients_users` (`name`, `username`, `id`, `organization`) VALUES
-('Another', 'AnotherUser', '4321', 'PUP'),
-('William', 'Simonde44', 'josellemonique4life', 'PUP'),
-('Monique', 'Polariaris', 'williamjames4life', 'OLFU'),
-('Luffy D. Monkey', 'LDM', '0505', 'Straw Hats Pirate'),
-('Real User', 'User_Real_99', 'mp3PPZr+RoiEtpGgUpJ5', 'OrgLang'),
-('Justin', 'Rodskov', 'H/kUuwrmVLsYrK3ee159', 'PUP'),
-('Human', 'UserHuman', '9b+4X8mP5zEb4T6+zPvX', 'Humanity'),
-('Alien', 'UserAlien', '8mQViARzbqy5odiSLskq', 'OuterSpace'),
-('Humalien', 'Alien_Human', 'amwps2lOeR+0PkqnIFiY', 'EarthAndSpace'),
-('Sample', 'UsernameSample', 'gGX3KF8aEpRY2ihRP2W0', 'SampleOrg'),
-('John Smith', 'JS', 'sTO+uy/LGezTfPRc8w4D', 'MI6'),
-('Johnny C. Isla', 'JCI', '8nc8Y+0mMsTwUktFA8hn', 'Wattpad'),
-('Bigmom Kaido', 'onigashima', 'tFJutWcLzYrlo3LdoL6KU62mqwHYVkK1crFqKWvhzKV+D/De5J', 'one piece'),
-('Sample', 'HelloSample', 'BXvsYuIe9xV3nWXQLTzddGXg2DoDRckf2N9lALx5/NTbxS+IQs', 'PUP'),
-('SampleHere', '1234', 's+jlqBs4MnY3UAU3RU+a8pJPOx+Q1UntttDo7ReReO/HyqU64L', 'PUP');
+('Monique Enciso', 'Polariaris', 'ddW2XaQRIga10pwcH1S+usRDerCLhbLoFiGsMzM3AUlpgGTHVA', 'OLFU'),
+('William James', 'Simonde44', 'VRc/yKxH/4sFW2rkwQ2MUScUg3jLS1W+TeAchZyejZx8XNZFAs', 'PUP'),
+('Joseph Joestar', 'jojostar', 'zAyk8U+2lJY9eOvi7/JQDn6ih6HI2USyn69vHj0OHG314DGa2Q', 'Speedwagon'),
+('Gojo Satoru', 'GS', 'zHv9J3JkNizZnQNFKZyKhu76k12L/z8qyHyuVW1tvfVlVnOa/p', 'JJK'),
+('Yuji Itadori', 'YI', 'noINA7/4dvh5Xxo5gfJTrb0EaHxuvP4EtJ+5HMHRJYXrjplXQ/', 'Jujutsu High');
 
 -- --------------------------------------------------------
 
@@ -91,23 +81,6 @@ CREATE TABLE `requests` (
   `req_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `requests`
---
-
-INSERT INTO `requests` (`send_to`, `sent_from`, `request_type`, `status`, `owner`, `team_id`, `req_id`) VALUES
-('Rodskov', 'Simonde44', 1, 0, 'Rodskov', 'OS_2024', '9R1gawtHW'),
-('Rodskov', 'Polariaris', 1, 0, 'Rodskov', 'OS_2024', 'aD0FEasdT'),
-('Polariaris', 'Simonde44', 1, 0, 'Polariaris', 'WD_2024', 'DzXetKt7/'),
-('Polariaris', 'Rodskov', 1, 0, 'Polariaris', 'WD_2024', 'JX7YInJzd'),
-('Simonde44', 'Polariaris', 1, 0, 'Simonde44', 'FORP_2024', 'mvz5qOUbb'),
-('Simonde44', 'Polariaris', 1, 0, 'Simonde44', 'FSHR_212', '3eZNjcLrz'),
-('Simonde44', 'Polariaris', 1, 0, 'Simonde44', 'CSI_2024', 'gTwTK2G5u'),
-('Simonde44', 'Polariaris', 1, 0, 'Simonde44', 'CrimLaw_2024', 'Ygj7s4uHO'),
-('Polariaris', 'Simonde44', 1, 0, 'Polariaris', 'LCD_2024', '7I/fryCvL'),
-('Rodskov', 'Polariaris', 1, 0, 'Rodskov', 'CSI_2024', '5cqVccdcf'),
-('Rodskov', 'Polariaris', 1, 0, 'Rodskov', 'CrimLaw_2024', 'zYtovrIdU');
-
 -- --------------------------------------------------------
 
 --
@@ -124,17 +97,15 @@ CREATE TABLE `request_details` (
 --
 
 INSERT INTO `request_details` (`req_id`, `req_info`) VALUES
-('9R1gawtHW', 'Simonde44 has invited you to join Operating Systems'),
-('aD0FEasdT', 'Polariaris has invited you to join Operating Systems'),
-('DzXetKt7/', 'Simonde44 has invited you to join Web Development'),
-('JX7YInJzd', 'Rodskov has invited you to join Web Development'),
-('mvz5qOUbb', 'Polariaris has invited you to join Forensic Photography'),
-('3eZNjcLrz', 'Polariaris has invited you to join Human Rights'),
-('gTwTK2G5u', 'Polariaris has invited you to join Crime Scene Investigation'),
-('Ygj7s4uHO', 'Polariaris has invited you to join Criminal Law'),
-('7I/fryCvL', 'Simonde44 has invited you to join Logic Circuits and Design'),
-('5cqVccdcf', 'Polariaris has invited you to join Crime Scene Investigation'),
-('zYtovrIdU', 'Polariaris has invited you to join Criminal Law');
+('V2E4GVvRR', 'Simonde44 has invited you to join Comp Eng 5'),
+('YCUjQ+uVh', 'Simonde44 has invited you to join Comp Eng 5'),
+('eohyVtx/W', 'Polariaris has invited you to join Human Rights'),
+('Mkir7idrt', 'Simonde44 has invited you to join Data and Digital Communications'),
+('wkbZOiWfg', 'Simonde44 has invited you to join Tampoy2'),
+('RzdD/HHFK', 'Polariaris has invited you to join Elumba Family'),
+('Ex8JCmxfM', 'Simonde44 has invited you to join Web Development'),
+('P48zxcNtg', 'Simonde44 has invited you to join Web Development'),
+('HfqEbZ0Eb', 'YI has invited you to join Jujutsu High');
 
 -- --------------------------------------------------------
 
@@ -170,23 +141,66 @@ CREATE TABLE `secret_creds` (
 --
 
 INSERT INTO `secret_creds` (`user_id`, `pass`) VALUES
-('Simonde44', '1234'),
-('Polariaris', '1234'),
-('Rodskov', 'qwer'),
-('UserHuman', 'zxcv'),
-('UserAlien', 'tyui'),
-('Alien_Human', 'fdsa'),
-('UsernameSample', 'zxcv'),
-('User_Real_99', 'asdf'),
-('LDM', 'asdf'),
-('JS', 'qwer'),
-('JCI', 'zxcv'),
-('onigashima', 'cherry'),
-('HelloSample', 'asdf'),
-('1234', 'zxcv'),
-('asdf', 'zxcv'),
-('asdfasdf', 'asdf'),
-('asdf', 'asdf');
+('Polariaris', '$2b$05$o3qzbD2GFI5e7tZ1DHAGw.JBGADjxQ4Ww8GZ32qsg2sVIWW71Fqze'),
+('Simonde44', '$2b$05$2IHZgK8Q3170hfPGB9rtZODFUpfvwTwV4HLWW0tXscqScP18oPfu.'),
+('jojo2star', '$2b$05$fiAa6..9ufpOH43SiUf4Leeuu/uiaEub6XviQFxLcT5q7zDVche6i'),
+('jojo2star', '$2b$05$SySG0D9XuVAcz.B7Gb5Nn.Oebw0YLm3.rxuJ4bQyZU5nWGt1wEoP.'),
+('jojo2star', '$2b$05$zDew9nW0aYyrc19dHwd84u7OP1/jn2lfnlMmDzBmHLmH9/rTuLvuq'),
+('jojo2star', '$2b$05$bIr0fwuDPgeuS0IEIESF6O6TmILvlAiMcY0so7i.CpS.Kl6e2xbN6'),
+('jojostar', '$2b$05$fuylS4grqkfUmcNvOo8Vpe/6/lbpkSLaDps708ok1zKfKqD6Lfbqq'),
+('GS', '$2b$05$cRyBiSlVUtV6lr19WNfC9euAwnmSvlHhXO9tliutnPOfd1d5nOWLO'),
+('YI', '$2b$05$CXcMrOTHmtUBm1Per6NfyOwK1oPbFH6b971ebID4nKQMUXqqOIS9.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task_members_list`
+--
+
+CREATE TABLE `task_members_list` (
+  `task_id` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `task_members_list`
+--
+
+INSERT INTO `task_members_list` (`task_id`, `user_id`) VALUES
+('ScripWrite', 'Polariaris'),
+('VidEditors', 'Simonde44'),
+('VidEditors', 'Polariaris'),
+('VidEditors', 'jojostar'),
+('dnxmd4fg9n/Q4SxSDd', 'Polariaris'),
+('dnxmd4fg9n/Q4SxSDd', 'Simonde44'),
+('F8GuI4uSXXRgrIql5+', 'jojostar'),
+('sIEemIzBDFcAsybQZ2', 'Polariaris'),
+('sIEemIzBDFcAsybQZ2', 'Simonde44'),
+('VidEditors', 'GS'),
+('VidEditors', 'YI');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task_names_group`
+--
+
+CREATE TABLE `task_names_group` (
+  `task_name` varchar(255) NOT NULL,
+  `task_id` varchar(255) NOT NULL,
+  `team_id` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `task_names_group`
+--
+
+INSERT INTO `task_names_group` (`task_name`, `task_id`, `team_id`) VALUES
+('Video Editor', 'VidEditors', 'WD_2024'),
+('Script Writer', 'ScripWrite', 'WD_2024'),
+('Front End', 'dnxmd4fg9n/Q4SxSDd', 'WD_2024'),
+('Back End Programmer', 'F8GuI4uSXXRgrIql5+', 'WD_2024'),
+('Networks Associate', 'sIEemIzBDFcAsybQZ2', 'DDC_2024');
 
 -- --------------------------------------------------------
 
@@ -204,15 +218,14 @@ CREATE TABLE `team_groups_name` (
 --
 
 INSERT INTO `team_groups_name` (`team_name`, `team_id`) VALUES
-('Operating Systems', 'OS_2024'),
 ('Web Development', 'WD_2024'),
-('Control Systems', 'FCS_2024'),
-('Data and Digital Communications', 'DDC_2024'),
 ('Forensic Photography', 'FORP_2024'),
-('Crime Scene Investigation', 'CSI_2024'),
-('Criminal Law', 'CrimLaw_2024'),
-('Logic Circuits and Design', 'LCD_2024'),
-('Human Rights', 'FSHR_212');
+('Human Rights', 'FSHR_212'),
+('Comp Eng 5', 'CET_2024'),
+('Data and Digital Communications', 'DDC_2024'),
+('Tampoy2', 'TMPY_2024'),
+('Elumba Family', 'Eli'),
+('Jujutsu High', 'JJH');
 
 -- --------------------------------------------------------
 
@@ -231,26 +244,26 @@ CREATE TABLE `team_members_list` (
 --
 
 INSERT INTO `team_members_list` (`user_id`, `team_id`, `access_level`) VALUES
-('4321', 'OS_2024', 0),
-('Sim44', 'OS_2024', 0),
-('Sim44', 'WD_2024', 0),
-('4321', 'FCS_2024', 0),
-('Sim44', 'FCS_2024', 0),
-('Sim44', 'DDC_2024', 0),
-('elle', 'FCS_2024', 0),
-('elle', 'WD_2024', 0),
-('LDM', 'OS_2024', 0),
-('0505', 'OS_2024', 0),
-('User_Real_99', 'WD_2024', 0),
-('Polariaris', 'OS_2024', 0),
-('Rodskov', 'WD_2024', 0),
-('Polariaris', 'WD_2024', 3),
-('Simonde44', 'WD_2024', 2),
 ('Polariaris', 'FORP_2024', 3),
-('Polariaris', 'CSI_2024', 3),
-('Polariaris', 'CrimLaw_2024', 3),
-('Simonde44', 'LCD_2024', 3),
-('Polariaris', 'FSHR_212', 3);
+('Simonde44', 'WD_2024', 3),
+('Polariaris', 'FSHR_212', 3),
+('Simonde44', 'FSHR_212', 1),
+('Polariaris', 'WD_2024', 1),
+('jojostar', 'WD_2024', 1),
+('Simonde44', 'CET_2024', 3),
+('jojostar', 'CET_2024', 1),
+('Polariaris', 'CET_2024', 1),
+('jojostar', 'FSHR_212', 1),
+('Simonde44', 'DDC_2024', 3),
+('Polariaris', 'DDC_2024', 1),
+('Simonde44', 'TMPY_2024', 3),
+('Polariaris', 'TMPY_2024', 1),
+('Polariaris', 'Eli', 3),
+('Simonde44', 'Eli', 1),
+('GS', 'WD_2024', 1),
+('YI', 'WD_2024', 1),
+('YI', 'JJH', 3),
+('GS', 'JJH', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
