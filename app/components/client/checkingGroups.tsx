@@ -68,13 +68,15 @@ export default function CheckingGroups() {
       )}
       {!loading && groupsData && groupsData.length > 0 && (
         <>
-          <h1>Name: {userData[0].name}</h1>
-          <h1>Groups:</h1>
+          <h1 className='text-3xl font-serif'>Name: {userData[0].name}</h1>
+          <h1 className='text-xl font-serif'>Groups:</h1>
           <ul>
             {groupsData.map((group: any) => (
-              <Link key={group.team_id} href={`/team-group?data=${encodeURIComponent(group.team_id)}`}>
-                <li>- {group.team_name}</li>
-              </Link>
+              <div className= 'bg-green-400 rounded w-1/3 min-w-65 p-5 border-black mb-5 mr-5 inline-block hover:min-h-20 font-mono'>
+                <Link key={group.team_id} href={`/team-group?data=${encodeURIComponent(group.team_id)}`}>
+                  <li>- {group.team_name}</li>
+                </Link>
+              </div>
             ))}
           </ul>
         </>

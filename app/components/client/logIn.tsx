@@ -59,13 +59,17 @@ const LogIn = () => {
   return (
     <>
         <ToastLayout>
-            <form method='POST' id='loginForm'>
-                <label htmlFor="username">Username: </label>
-                <input type="text" name="username" id="username" onChange={unameHandler} className='text-black'/> <br />
-                <label htmlFor="password">Password: </label>
-                <input type="password" name="password" id="password" onChange={passHandler} className='text-black'/> <br />
-                <button onClick={btnFunction}>Log in</button> <br />
-            </form>
+            <div className='ml-auto bg-green-400'>
+                <div className=''>
+                    <form method='POST' id='loginForm'>
+                        <label htmlFor="username">Username: </label>
+                        <input type="text" name="username" id="username" onChange={unameHandler} className='text-black'/> <br />
+                        <label htmlFor="password">Password: </label>
+                        <input type="password" name="password" id="password" onChange={passHandler} className='text-black'/> <br />
+                        <button onClick={btnFunction}>Log in</button> <br />
+                    </form>
+                </div>
+            </div>
         </ToastLayout>
     </>
   )
