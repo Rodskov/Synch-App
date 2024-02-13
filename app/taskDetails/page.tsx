@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import ToastLayout from '../components/essentials/toastlayout'
 import { toast } from 'react-toastify'
+import Navbar from '../components/client/navbar'
 
 export default function TasksDetails({ searchParams }: { searchParams: { task_id: string } }) {
     const router = useRouter()
@@ -121,29 +122,42 @@ export default function TasksDetails({ searchParams }: { searchParams: { task_id
   return (
     <ToastLayout>
         {loading && (
-            <>
-                Task data loading...
-            </>
+            <div className="flex flex-col justify-center items-center h-screen">
+                <h1 className="text-4xl text-center mb-8">Data Loading</h1>
+            </div>
         )}
         {!loading && taskName && (
-            <h1>Task Name: {taskName}</h1>
+            <>
+            <Navbar />
+                <h1>Task Name: {taskName}</h1>
+            </>
         )}
         {!loading && members && (
+            <>
             <ul>
                 {members.map((member:any) => (
                     <li key={member.username}>- {member.name}</li>
                 ))}
             </ul>
+            <button onClick={goBack}>Go back</button> <br />
+            </>
         )}
         <button onClick={addMember}>Add a member</button> <br />
         {addNewMember && (
-            <form method='POST' id='addMemberForm'>
-                <label htmlFor="username">Username: </label>
-                <input type="text" name="username" id="username" className='text-black' onChange={unameHandler}/> <br />
-                <button onClick={btnSubmit}>Add the member to task</button>
-            </form>
+            <>
+                <div className='flex justify-center align-middle'>
+                    <div className='bg-synchBlue-50 rounded-lg p-40 transition-all duration-300'>
+                        <form method='POST' id='addMemberForm'>
+                            <div className='mb-8'>
+                                <label htmlFor="username" className='text-2xl'>Username: </label>
+                                <input type="text" name="username" id="username" className='text-black border-synchGray-200 rounded px-3 py-2' onChange={unameHandler}/>
+                            </div>
+                            <button onClick={btnSubmit} className='px-1 py-2 bg-synchBlue-50 rounded-lg hover:bg-synchBlue-100'>Add the member to task</button>
+                        </form>
+                    </div>
+                </div>
+            </>
         )}
-        <button onClick={goBack}>Go back</button>
     </ToastLayout>
   )
 }

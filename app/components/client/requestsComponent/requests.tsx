@@ -28,21 +28,33 @@ export default function Requests() {
     <>
         {loading && <p>Loading Requests...</p>}
         {!loading && (!reqsData || reqsData.length === 0) && (
-            <p>
-                No Requests as of Now...
-            </p>
+            <div>
+                <h1 className='flex text-3xl mb-11 justify-center mt-3'>Requests/Messages</h1>
+                <h1 className='flex text-2xl justify-center'>
+                    No Requests as of now...
+                </h1>
+            </div>
         )}
         {!loading && reqsData && reqsData.length > 0 &&(
-    <ul>
-        {reqsData.map((reqs: any) => (
-            <div key={reqs.req_id}>
-                {reqs.status === 0 && (
-                <Link href={`/user/messageDetails?req_id=${encodeURIComponent(reqs.req_id)}`}>{reqs.sent_from} - {reqs.team_id} </Link>
-                )}
+            <>
+            <div>
+                <h1 className='flex text-3xl mb-11 justify-center mt-3'>Requests/Messages</h1>
             </div>
-        ))}
-    </ul>
-)}
+            <ul>
+                {reqsData.map((reqs: any) => (
+                    <div key={reqs.req_id}>
+                        {reqs.status === 0 && (
+                        <Link href={`/user/messageDetails?req_id=${encodeURIComponent(reqs.req_id)}`}>
+                            <div className='bg-synchGray-50 rounded-lg py-3 px-2 mb-2'>
+                            {reqs.sent_from} - {reqs.team_id} 
+                            </div>
+                        </Link>
+                        )}
+                    </div>
+                ))}
+            </ul>
+            </>
+        )}
     </>
   )
 }

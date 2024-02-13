@@ -5,8 +5,11 @@ import CheckingGroups from '../components/client/checkingGroups'
 import Requests from '../components/client/requestsComponent/requests'
 import LogoutBtn from '../components/client/buttons/logout'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import Navbar from '../components/client/navbar'
 
 export default function Dashboard() {
+  const router = useRouter()
   const [loading, setLoading] = useState<any>(true)
   const [userCookie, setUserCookie] = useState<any>(null)
   useEffect(() => {
@@ -28,18 +31,25 @@ export default function Dashboard() {
   return (
     <>
         <ToastLayout>
-          {userCookie && (
+          {loading && (
             <>
+            <div className="flex flex-col justify-center items-center h-screen">
+              <h1 className="text-4xl text-center mb-8">Data Loading</h1>
+            </div>
+          </>
+          )}
+          {!loading && userCookie && (
+            <>
+              <Navbar />
               <CheckingGroups /> <br />
-              <Link href={'/user/messages'}>Check messages</Link> <br />
-              <Link href={'/createNewTeam'}>Create a team</Link> <br />
-              <LogoutBtn />
             </>
           )}
-          {!userCookie && (
+          {!loading && !userCookie && (
             <>
-              <h1>Restricted access.</h1>
-              <Link href={'/'}>Go back to landing page</Link>
+              <div className="flex flex-col justify-center items-center h-screen">
+                <h1 className="text-4xl text-center mb-8">Restricted Access.</h1>
+                <Link href={'/'} className="text-sm">Go back to landing page</Link>
+              </div>
             </>
           )}
         </ToastLayout>

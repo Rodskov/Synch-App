@@ -4,6 +4,7 @@ import ToastLayout from '../components/essentials/toastlayout';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Navbar from '../components/client/navbar';
 
 type SendData = {
   username: string,
@@ -90,9 +91,11 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
     })
     const result = await response.json()
     if(result.receiver !== undefined){
+      const invBtnRef:any = document.getElementById('invBtn')
+      invBtnRef.disabled = true;
       console.log(result.receiver)
       toast.success("Invitation is sent to " + result.receiver)
-      setTimeout(() => { router.push('/dashboard') }, 2000)
+      setTimeout(() => { router.back() }, 2000)
     } else if(result.message !== undefined){
       toast.error(result.message)
     }
@@ -103,13 +106,20 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
 
   const componentRender = () => {
     return(
-      <div>
-        <h1>Add a new member to the group</h1>
-        <label htmlFor="unamevalue">Username: </label>
-        <input type="text" className='text-black' onChange={unameHandler} /> <br />
-        <button onClick={sendInvBtn}>Send Invite</button> <br />
-        <button onClick={backBtn}>Go Back</button>
+      <>
+      <Navbar />
+      <div className='flex flex-col items-center py-11 h-[35rem]'>
+        <h1 className='text-4xl mb-11'>Add new member</h1>
+        <div className='bg-synchBlue-50 rounded-lg py-10 px-11 flex flex-col items-center'>
+          <div className="flex items-center mb-2">
+            <label htmlFor="unamevalue" className='text-2xl'>Username: </label>
+            <input type="text" className='text-black rounded-lg px-2 py-1 ml-2' onChange={unameHandler} /> {/* Added ml-2 */}
+          </div>
+          <button id='invBtn' className='bg-synchGray-50 hover:bg-synchGray-100 rounded-lg py-1 px-6 mb-2' onClick={sendInvBtn}>Send Invite</button>
+          <button className='bg-synchGray-50 hover:bg-synchGray-100 rounded-lg py-1 px-8' onClick={backBtn}>Go Back</button>
+        </div>
       </div>
+      </>
     )
   }
 

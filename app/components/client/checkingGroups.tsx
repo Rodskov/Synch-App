@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { json } from 'stream/consumers';
 
 type UserData = {
   user_id: string;
@@ -54,31 +53,36 @@ export default function CheckingGroups() {
 
   return (
     <div>
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div className="flex flex-col justify-center items-center h-screen">
+          <h1 className="text-4xl text-center mb-8">Data Loading</h1>
+        </div>
+      )}
       {!loading && !groupsData && !userData && (
         <>
           <h1>You do not have access to this content.</h1>
         </>
       )}
       {!loading && (!groupsData || groupsData.length === 0) && userData && (
-        <p>
-          Name: {userData[0]?.name} <br />
-          No teams joined
-        </p>
+        <div>
+          <h1 className='text-3xl font-serif justify-center'>{userData[0].name}</h1>
+          <h1 className='text-xl font-serif'>No Groups joined...</h1>
+        </div>
       )}
       {!loading && groupsData && groupsData.length > 0 && (
         <>
-          <h1 className='text-3xl font-serif'>Name: {userData[0].name}</h1>
-          <h1 className='text-xl font-serif'>Groups:</h1>
-          <ul>
-            {groupsData.map((group: any) => (
-              <div className= 'bg-green-400 rounded w-1/3 min-w-65 p-5 border-black mb-5 mr-5 inline-block hover:min-h-20 font-mono'>
-                <Link key={group.team_id} href={`/team-group?data=${encodeURIComponent(group.team_id)}`}>
-                  <li>- {group.team_name}</li>
-                </Link>
-              </div>
-            ))}
-          </ul>
+          <div>
+            <h1 className='flex text-3xl font-serif mb-11 mt-1 justify-start'>{userData[0].name}</h1>
+            <ul className="flex flex-wrap justify-start">
+                {groupsData.map((group: any) => (
+                    <Link key={group.team_id} href={`/team-group?data=${encodeURIComponent(group.team_id)}`}>
+                        <div className= 'bg-synchBlue-50 rounded p-5 border-black mb-5 mr-5 inline-block hover:bg-synchBlue-100 font-mono h-[5rem] w-[20rem]'>
+                            <li className="whitespace-normal">- {group.team_name}</li>
+                        </div>
+                    </Link>
+                ))}
+            </ul>
+          </div>
         </>
       )}
     </div>

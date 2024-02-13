@@ -8,6 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        synchBlue: {
+          50: "#181D39",
+          100: "#101325"
+        },
+        synchGray: {
+          50: "#3B3C48",
+          100: "#2F3039",
+          150: "#202023",
+          200: "#181818",
+        }
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

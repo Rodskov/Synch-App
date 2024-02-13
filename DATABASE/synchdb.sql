@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2024 at 03:52 PM
+-- Generation Time: Feb 13, 2024 at 04:19 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -63,7 +63,9 @@ INSERT INTO `clients_users` (`name`, `username`, `id`, `organization`) VALUES
 ('William James', 'Simonde44', 'VRc/yKxH/4sFW2rkwQ2MUScUg3jLS1W+TeAchZyejZx8XNZFAs', 'PUP'),
 ('Joseph Joestar', 'jojostar', 'zAyk8U+2lJY9eOvi7/JQDn6ih6HI2USyn69vHj0OHG314DGa2Q', 'Speedwagon'),
 ('Gojo Satoru', 'GS', 'zHv9J3JkNizZnQNFKZyKhu76k12L/z8qyHyuVW1tvfVlVnOa/p', 'JJK'),
-('Yuji Itadori', 'YI', 'noINA7/4dvh5Xxo5gfJTrb0EaHxuvP4EtJ+5HMHRJYXrjplXQ/', 'Jujutsu High');
+('Yuji Itadori', 'YI', 'noINA7/4dvh5Xxo5gfJTrb0EaHxuvP4EtJ+5HMHRJYXrjplXQ/', 'Jujutsu High'),
+('Megumi Fushiguro', 'MF', '9bfPmhqnN25087CVw2qgm6IsLa4W/PGoRVD0tnGOYyMlVPkxsb', 'Jujutsu High'),
+('Johnny C. Isla', 'Cielow', 'lRCCdFTtwIr4IN7Iclaiw91SLYWs47Ho3DKE0wHMaIbUzEKYsN', 'Wattpad');
 
 -- --------------------------------------------------------
 
@@ -91,21 +93,6 @@ CREATE TABLE `request_details` (
   `req_id` varchar(255) NOT NULL,
   `req_info` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `request_details`
---
-
-INSERT INTO `request_details` (`req_id`, `req_info`) VALUES
-('V2E4GVvRR', 'Simonde44 has invited you to join Comp Eng 5'),
-('YCUjQ+uVh', 'Simonde44 has invited you to join Comp Eng 5'),
-('eohyVtx/W', 'Polariaris has invited you to join Human Rights'),
-('Mkir7idrt', 'Simonde44 has invited you to join Data and Digital Communications'),
-('wkbZOiWfg', 'Simonde44 has invited you to join Tampoy2'),
-('RzdD/HHFK', 'Polariaris has invited you to join Elumba Family'),
-('Ex8JCmxfM', 'Simonde44 has invited you to join Web Development'),
-('P48zxcNtg', 'Simonde44 has invited you to join Web Development'),
-('HfqEbZ0Eb', 'YI has invited you to join Jujutsu High');
 
 -- --------------------------------------------------------
 
@@ -149,7 +136,9 @@ INSERT INTO `secret_creds` (`user_id`, `pass`) VALUES
 ('jojo2star', '$2b$05$bIr0fwuDPgeuS0IEIESF6O6TmILvlAiMcY0so7i.CpS.Kl6e2xbN6'),
 ('jojostar', '$2b$05$fuylS4grqkfUmcNvOo8Vpe/6/lbpkSLaDps708ok1zKfKqD6Lfbqq'),
 ('GS', '$2b$05$cRyBiSlVUtV6lr19WNfC9euAwnmSvlHhXO9tliutnPOfd1d5nOWLO'),
-('YI', '$2b$05$CXcMrOTHmtUBm1Per6NfyOwK1oPbFH6b971ebID4nKQMUXqqOIS9.');
+('YI', '$2b$05$CXcMrOTHmtUBm1Per6NfyOwK1oPbFH6b971ebID4nKQMUXqqOIS9.'),
+('MF', '$2b$05$zkZrmpcK/GAyWxyE6bGwuunuwi0r.w4xpMw2kxZfPVOfwzb9TXAz.'),
+('Cielow', '$2b$05$nJwpKjr75HKt9iphpGrNyuVxQ8.r6HBRaGMAZx6yjuR4IYhz03vmS');
 
 -- --------------------------------------------------------
 
@@ -177,7 +166,10 @@ INSERT INTO `task_members_list` (`task_id`, `user_id`) VALUES
 ('sIEemIzBDFcAsybQZ2', 'Polariaris'),
 ('sIEemIzBDFcAsybQZ2', 'Simonde44'),
 ('VidEditors', 'GS'),
-('VidEditors', 'YI');
+('VidEditors', 'YI'),
+('ictJqPlZREBs0AVTZw', 'Polariaris'),
+('ictJqPlZREBs0AVTZw', 'Simonde44'),
+('ScripWrite', 'Simonde44');
 
 -- --------------------------------------------------------
 
@@ -200,7 +192,8 @@ INSERT INTO `task_names_group` (`task_name`, `task_id`, `team_id`) VALUES
 ('Script Writer', 'ScripWrite', 'WD_2024'),
 ('Front End', 'dnxmd4fg9n/Q4SxSDd', 'WD_2024'),
 ('Back End Programmer', 'F8GuI4uSXXRgrIql5+', 'WD_2024'),
-('Networks Associate', 'sIEemIzBDFcAsybQZ2', 'DDC_2024');
+('Networks Associate', 'sIEemIzBDFcAsybQZ2', 'DDC_2024'),
+('PCB Soldering', 'ictJqPlZREBs0AVTZw', 'CET_2024');
 
 -- --------------------------------------------------------
 
@@ -263,7 +256,15 @@ INSERT INTO `team_members_list` (`user_id`, `team_id`, `access_level`) VALUES
 ('GS', 'WD_2024', 1),
 ('YI', 'WD_2024', 1),
 ('YI', 'JJH', 3),
-('GS', 'JJH', 1);
+('GS', 'JJH', 1),
+('Simonde44', 'JJH', 1),
+('Simonde44', 'FORP_2024', 1),
+('MF', 'WD_2024', 1),
+('MF', 'FORP_2024', 1),
+('MF', 'JJH', 1),
+('MF', 'FSHR_212', 1),
+('Cielow', 'FORP_2024', 1),
+('Polariaris', 'JJH', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

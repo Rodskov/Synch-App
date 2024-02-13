@@ -1,4 +1,5 @@
 'use client';
+import Navbar from '@/app/components/client/navbar';
 import ToastLayout from '@/app/components/essentials/toastlayout';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
@@ -106,13 +107,13 @@ export default function MessageDetails({ searchParams }: { searchParams: { req_i
             })
             const result = await response.json()
             toast.error(result)
-            setTimeout(() => { router.push('/dashboard') }, 2000)
+            setTimeout(() => { router.back() }, 2000)
             const acceptBtnRef:any = document.getElementById('acceptBtn')
             const declineBtnRef:any = document.getElementById('declinetBtn')
             acceptBtnRef.disabled = true
             declineBtnRef.disabled = true
         } catch (error) {
-            
+            console.log(error)
         }
     }
 
@@ -121,25 +122,48 @@ export default function MessageDetails({ searchParams }: { searchParams: { req_i
         <ToastLayout>
             {loading && (
                 <>
-                    Loading. Please Wait.
+                    <div className="flex flex-col justify-center items-center h-screen">
+                        <h1 className="text-4xl text-center mb-8">Data Loading</h1>
+                    </div>
                 </>
             )}
             {!authenticated && !loading && (
                 <>
-                    You do not have access to this content. <br />
-                    <Link href={'/'}>Go back</Link>
+                    <div className="flex flex-col justify-center items-center h-screen">
+                        <h1 className="text-4xl text-center mb-8">Restricted Access.</h1>
+                        <Link href={'/'} className="text-sm">Go back</Link>
+                    </div>
                 </>
             )}
             {!loading && requestDetails && authenticated && (
-                <div>
-                    Message: <br />
-                    {requestDetails[0].req_info}
-                    <br /> <br />
-                    <button onClick={acceptBtn} id='acceptBtn'>Accept</button> <br />
-                    <button onClick={declineBtn} id='declineBtn'>Decline</button> <br />
-                    <br />
-                    <Link href={'/user/messages'}>Go back</Link>
+                <>
+                <Navbar />
+                <div className='flex flex-col items-center justify-center'>
+                    <h1 className='text-3xl mb-10 mt-5'>
+                        Message:
+                    </h1>
+                    <div className='flex flex-col bg-synchGray-100 rounded-lg py-10 px-44'>
+                        <h1 className='text-2xl'>
+                            {requestDetails[0].req_info}
+                        </h1>
+                        <br /> <br />
+                        <div className='flex justify-center'>
+                            <div className='px-3'>
+                            <button className='bg-synchBlue-50 hover:bg-synchBlue-100 rounded-lg py-5 px-10' onClick={acceptBtn} id='acceptBtn'>Accept</button> <br />
+                            </div>
+                            <div className='px-3'>
+                            <button className='bg-synchGray-150 hover:bg-synchGray-200 rounded-lg py-5 px-10' onClick={declineBtn} id='declineBtn'>Decline</button> <br />
+                            </div> 
+                        </div>
+                        <br />
+                        <Link href={'/user/messages'}>
+                            <div className='flex justify-center'>
+                                <h1 className='text-2xl'>Go Back</h1>
+                            </div>
+                        </Link>
+                    </div>
                 </div>
+                </>
             )}
         </ToastLayout>
     </>

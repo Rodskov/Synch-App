@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import ToastLayout from '../components/essentials/toastlayout'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Navbar from '../components/client/navbar'
 
 export default function NewTeam() {
     const router = useRouter()
@@ -68,6 +69,7 @@ export default function NewTeam() {
   return (
     <> 
         <ToastLayout>
+            <Navbar />
             <label htmlFor="teamName">Team Name: </label>
             <input type="text" className='text-black' onBlur={teamNameHandler} placeholder='Team Name' required/> <br />
             <label htmlFor="teamName">Team ID: </label>

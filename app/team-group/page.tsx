@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import Tasks from '../components/client/tasks/tasks';
 import { useRouter } from 'next/navigation';
+import Navbar from '../components/client/navbar';
 
 export default function Page({ searchParams }: { searchParams: { data: string } }) {
     const [owner, setOwner] = useState<any>(null)
@@ -126,41 +127,50 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
 
     return (
         <div>
-            {loading && <p>Data loading...</p>}
-            {!loading && !authData && !membersData && (
-                <p>
-                    You do not have access to this content... <br />
-                    <Link href={'/'}>
-                        <button>Go Back</button>
-                    </Link>
-                </p>
-            )}
-            {!loading && membersData && authData && (
-                <>
-                    <h1>Team Name: <br /> {teamName}</h1> <br />
-                    <h1>Members: </h1>
-                    <ul>
-                        {membersData.map((member: any) => (
-                            <li key={member.username}>{member.name}</li>
-                        ))}
-                    </ul>
-                    <br />
-                    {(owner || admin) && (
-                        <>
-                            <button onClick={addNewMemberFunc}>Add new member</button> <br />
-                            <button onClick={addNewTaskFunc}>Add Task</button> <br />
-                        </>
-                    )}
-                    <Link href={'/'}>Go back</Link>
-                    <div>
-                    {tasks.map((task: any) => (
-                        <Link href={`/taskDetails?task_id=${encodeURIComponent(task.task_id)}`} key={task.task_id}>
-                            <Tasks task_id={task.task_id}/>
-                        </Link>
+        {loading && (
+            <div className="flex flex-col justify-center items-center h-screen">
+            <h1 className="text-4xl text-center mb-8">Data Loading</h1>
+            </div>
+        )}
+        {!loading && !authData && !membersData && (
+            <div className="flex flex-col justify-center items-center h-screen">
+            <h1 className="text-4xl text-center mb-8">Restricted Access.</h1>
+            <Link href={'/'} className="text-sm">Go back to landing page</Link>
+            </div>
+        )}
+        {!loading && membersData && authData && (
+            <>
+            <Navbar />
+            <div className="flex flex-row justify-start items-start">
+            <div className="flex flex-col justify-center w-1/2">
+                <h1 className="text-3xl font-bold font-mono mb-8">{teamName}</h1>
+                <h1 className="text-2xl font-mono">Members:</h1>
+                <ul>
+                    {membersData.map((member: any) => (
+                    <li key={member.username}>{member.name}</li>
                     ))}
+                </ul>
+                <br />
+                {(owner || admin) && (
+                    <div className="flex flex-col items-start"> 
+                    <button onClick={addNewMemberFunc}>Add new member</button>
+                    <button onClick={addNewTaskFunc}>Add Task</button>
                     </div>
-                </>
-            )}
+                )}
+                <Link href={'/'}>Go back</Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-1/2 max-w-screen-lg">
+            {tasks.map((task: any) => (
+                <Link href={`/taskDetails?task_id=${encodeURIComponent(task.task_id)}`} key={task.task_id}>
+                <div className="bg-synchGray-100 p-4 rounded-lg w-full">
+                    <Tasks task_id={task.task_id} />
+                </div>
+                </Link>
+            ))}
+            </div>
+            </div>
+          </>
+        )}
         </div>
     );
 }
