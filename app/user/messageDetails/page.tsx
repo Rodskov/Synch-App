@@ -58,7 +58,7 @@ export default function MessageDetails({ searchParams }: { searchParams: { req_i
         fetchDataFromDB()
         checkUserDetail()
         console.log(searchParams.req_id)
-    }, [])
+    })
 
     useEffect(() => {
     }, [requestDetails])

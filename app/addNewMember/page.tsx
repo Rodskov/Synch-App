@@ -70,8 +70,7 @@ export default function Page({ searchParams }: { searchParams: { team_id: string
     }
     credentialCheck()
   
-  }, [])
-
+  },)
   const unameHandler = (event: any) => {
     unameValue = event.target.value
   }

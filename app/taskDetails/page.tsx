@@ -60,7 +60,7 @@ export default function TasksDetails({ searchParams }: { searchParams: { task_id
         }
         getTaskName()
         getMembers()
-    }, [])
+    })
     useEffect(() => {
     }, [members])
     useEffect(() => {

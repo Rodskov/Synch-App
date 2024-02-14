@@ -1,13 +1,13 @@
 'use client';
 // This component checks all the groups a user is in
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 type TeamID = {
     team_id: String,
 }
 
 export default function CheckingMembers() {
-    var data: any = []
+    const data = useMemo(() => [''], [])
 
     useEffect(() => {
         console.log(data)

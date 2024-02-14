@@ -25,7 +25,7 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  });
 
   return (
     <div className="relative bg-cover bg-center" style={{ backgroundImage: "url('CoverPage.jpg')" }}>

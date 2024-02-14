@@ -115,7 +115,7 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
         getTasks();
         getTeamName();
         getTeamData();
-    }, []);
+    },);
 
     const addNewTaskFunc = () => {
         router.push(`/addTask?team_id=${encodeURIComponent(searchParams.data)}`)
@@ -155,8 +155,8 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                         </div>
                         <ul>
                             {membersData.map((member: any) => (
-                                <div className='flex flex-col items-center justify-center'>
-                                    <li key={member.username}>{member.name}</li>
+                                <div key={member.username} className='flex flex-col items-center justify-center'>
+                                    <li>{member.name}</li>
                                 </div>
                             ))}
                         </ul>
@@ -185,8 +185,8 @@ export default function Page({ searchParams }: { searchParams: { data: string } 
                 </div>
             )}
             {tasks.map((task: any) => (
-                <div className="bg-synchGray-100 p-4 rounded-lg w-100">
-                    <Link href={`/taskDetails?task_id=${encodeURIComponent(task.task_id)}`} key={task.task_id}>
+                <div key={task.task_id} className="bg-synchGray-100 p-4 rounded-lg w-100">
+                    <Link href={`/taskDetails?task_id=${encodeURIComponent(task.task_id)}`}>
                         <Tasks task_id={task.task_id} />
                     </Link>
                 </div>
