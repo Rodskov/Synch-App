@@ -28,15 +28,18 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-cover bg-center" style={{ backgroundImage: "url('CoverPage.jpg')" }}>
-      {loading && <div>Loading...</div>}
-      {!loading && !cookieExists && (
-        <>
-          <ToastLayout>
-            <LogIn />
-          </ToastLayout>
-        </>
-      )}
+    <div className="relative bg-cover bg-center" style={{ backgroundImage: "url('CoverPage.jpg')" }}>
+      <div className="absolute inset-0 bg-black opacity-70"></div>
+      <div className="relative z-10">
+        {loading && <div>Loading...</div>}
+        {!loading && !cookieExists && (
+          <>
+            <ToastLayout>
+              <LogIn />
+            </ToastLayout>
+          </>
+        )}
+      </div>
     </div>
   );
 }

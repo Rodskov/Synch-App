@@ -115,13 +115,15 @@ const SignUp = () => {
                         <label htmlFor="verify-pass" className="font-mono mb-2">Verify Password:</label>
                         <input type="password" onBlur={passVerifyHandler} className="text-black border border-gray-400 rounded px-3 py-2" required/>
                     </div>
-                    <button onClick={submit} className="bg-synchBlue-50 hover:bg-synchBlue-100 text-white font-bold py-2 px-4 rounded">
-                        Create Account
-                    </button>
+                    <div className='flex justify-center'>
+                        <button onClick={submit} className="bg-synchBlue-50 font-mono hover:bg-synchBlue-100 min-w-40 text-white font-bold py-2 px-4 rounded mr-1">
+                            Create Account
+                        </button>
+                        <button onClick={homePageBtn} type='button' className="bg-synchGray-150 font-mono hover:bg-synchGray-200 min-w-40 text-white font-bold py-2 px-4 rounded ml-1">
+                        Go Back
+                        </button>
+                    </div>
                 </form>
-                <button onClick={homePageBtn} className="bg-synchGray-50 hover:bg-synchGray-100 text-white font-bold py-2 px-4 rounded mt-4">
-                    Go Back to Home Page
-                </button>
             </div>
         </div>
         </ToastLayout>

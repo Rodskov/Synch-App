@@ -26,7 +26,7 @@ const Navbar = () => {
         </div>
         <div className="flex flex-grow justify-center"> {/* Added flex-grow and justify-center */}
           <Link href="/">
-            <h1 className="text-xl font-bold cursor-pointer">Synch App</h1>
+            <h1 className="text-xl font-bold cursor-pointer">Synch</h1>
           </Link>
         </div>
         <div className="hidden md:block">
@@ -34,16 +34,6 @@ const Navbar = () => {
             <li>
               <Link href="/dashboard">
                 <h1 className="hover:text-gray-300 cursor-pointer">Dashboard</h1>
-              </Link>
-            </li>
-            <li>
-              <Link href="/about">
-                <h1 className="hover:text-gray-300 cursor-pointer">About</h1>
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact">
-                <h1 className="hover:text-gray-300 cursor-pointer">Contact</h1>
               </Link>
             </li>
           </ul>

@@ -64,23 +64,27 @@ const LogIn = () => {
     <>
         <ToastLayout>
         <div className="flex flex-col items-center justify-center h-screen">
-            <div className="bg-gray-900 rounded-lg p-8">
+            <div className="bg-gray-900 rounded-[1rem] p-8">
                 <div className='flex flex-col justify-center items-center'>
                     <h1 className="text-6xl mb-2 font-mono">SYNCH</h1>
                     <h1 className='text-3xl mb-8 font-mono'>A Collaboration Tool</h1>
                 </div>
                 <div className='flex justify-center'>
                     <form method="POST" id="loginForm" className="text-black">
+                        <div className='flex flex-col mb-5'>
                         <label htmlFor="username" className='text-white'>Username:</label>
                         <input type="text" name="username" id="username" onChange={unameHandler} className="block mb-4 px-2 rounded-lg" />
                         <label htmlFor="password" className='text-white'>Password:</label>
                         <input type="password" name="password" id="password" onChange={passHandler} className="block mb-4 px-2 rounded-lg" />
-                        <button onClick={btnFunction} className="bg-synchBlue-50 hover:bg-synchBlue-100 text-white font-bold py-2 px-4 rounded mb-1 w-44">
-                            Log in
-                        </button> <br />
-                        <button onClick={signUpBtn} className="bg-synchGray-50 hover:bg-synchGray-100 text-white font-bold py-2 px-4 rounded w-44">
-                            Sign Up
-                        </button>
+                        </div>
+                        <div className='flex flex-row justify-between'>
+                            <button onClick={btnFunction} className="bg-synchBlue-50 hover:bg-synchBlue-100 text-white font-bold py-3 px-4 rounded mr-1 w-44">
+                                Log in
+                            </button>
+                            <button onClick={signUpBtn} className="bg-synchGray-50 hover:bg-synchGray-100 text-white font-bold py-3 px-4 rounded ml-1 w-44">
+                                Sign Up
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

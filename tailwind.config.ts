@@ -11,7 +11,8 @@ const config: Config = {
       colors: {
         synchBlue: {
           50: "#181D39",
-          100: "#101325"
+          100: "#101325",
+          150: "#00093B",
         },
         synchGray: {
           50: "#3B3C48",
