@@ -7,7 +7,7 @@ type TeamID = {
 }
 
 export default function CheckingMembers() {
-    const data = useMemo(() => [''], [])
+    var data = useMemo(() => [''], [])
 
     useEffect(() => {
         console.log(data)
